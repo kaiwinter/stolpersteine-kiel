@@ -12,7 +12,7 @@ import de.vrlfr.stolpersteine.database.StolpersteinBo;
 
 public class StolpersteinListAdapter extends ArrayAdapter<StolpersteinBo> implements Filterable {
 
-	private List<StolpersteinBo> stolpersteineFilterList;
+	private final List<StolpersteinBo> stolpersteineFilterList;
 
 	private ValueFilter valueFilter;
 
@@ -30,7 +30,7 @@ public class StolpersteinListAdapter extends ArrayAdapter<StolpersteinBo> implem
 		return valueFilter;
 	}
 
-	class ValueFilter extends Filter {
+	private class ValueFilter extends Filter {
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();

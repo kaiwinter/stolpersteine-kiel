@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,11 +28,11 @@ import java.util.List;
 
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.FullscreenImageActivity;
-import de.vrlfr.stolpersteine.activity.StolpersteinActivity;
 import de.vrlfr.stolpersteine.database.StolpersteinBo;
 
 public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 
+	private static final String TAG = NamesRowItemAdapter.class.getSimpleName();
 	private static final int ROW_ID = R.layout.stolperstein_listview_item;
 
 	private final List<Collection<StolpersteinBo>> stolpersteineList;
@@ -120,10 +121,8 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 		try {
 			openFileOutput = getContext().openFileOutput("biografie.pdf", Context.MODE_WORLD_READABLE);
 			copyFile(getContext().getAssets().open("id" + bioId + ".pdf"), openFileOutput);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(TAG, e.getMessage());
 		} finally {
 			if (openFileOutput != null) {
 				try {

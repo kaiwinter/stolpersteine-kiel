@@ -193,7 +193,7 @@ public class MapFragment extends Fragment {
 			String adresse = stolperstein.getAdresse();
 			ArrayList<StolpersteinBo> stolpersteineAnAdresse = adresse2Stolpersteine.get(adresse);
 			if (stolpersteineAnAdresse == null) {
-				stolpersteineAnAdresse = new ArrayList<StolpersteinBo>();
+				stolpersteineAnAdresse = new ArrayList<>();
 				adresse2Stolpersteine.put(adresse, stolpersteineAnAdresse);
 			}
 			stolpersteineAnAdresse.add(stolperstein);
@@ -203,7 +203,7 @@ public class MapFragment extends Fragment {
 	}
 
 	private class InfoWindowRefresher implements Callback {
-		private Marker markerToRefresh;
+		private final Marker markerToRefresh;
 
 		private InfoWindowRefresher(Marker markerToRefresh) {
 			this.markerToRefresh = markerToRefresh;

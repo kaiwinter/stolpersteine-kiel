@@ -67,7 +67,7 @@ public class ListFragment extends Fragment implements OnQueryTextListener {
 				StolpersteinBo stolpersteinBo = adapter.getItem(position);
 
 				LatLng latLng = new LatLng(stolpersteinBo.getLatitude(), stolpersteinBo.getLongitude());
-				ArrayList<StolpersteinBo> arrayList = new ArrayList<StolpersteinBo>(Collections
+				ArrayList<StolpersteinBo> arrayList = new ArrayList<>(Collections
 						.singletonList(stolpersteinBo));
 				Intent intent = StolpersteinActivity.newIntent(getActivity(), arrayList, latLng);
 				startActivity(intent);

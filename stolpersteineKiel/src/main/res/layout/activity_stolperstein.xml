@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:parallax_factor="1.9"
-    tools:context=".MainActivity" >
+    tools:context="de.vrlfr.stolpersteine.activity.MainActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"

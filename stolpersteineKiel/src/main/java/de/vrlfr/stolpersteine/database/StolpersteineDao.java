@@ -33,7 +33,7 @@ public final class StolpersteineDao {
 	}
 
 	private static ArrayList<StolpersteinBo> getStolpersteineInternal(SQLiteDatabase database) {
-		ArrayList<StolpersteinBo> stolpersteine = new ArrayList<StolpersteinBo>();
+		ArrayList<StolpersteinBo> stolpersteine = new ArrayList<>();
 
 		Cursor cursor = null;
 		try {
