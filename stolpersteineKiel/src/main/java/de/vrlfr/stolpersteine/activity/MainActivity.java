@@ -1,8 +1,5 @@
 package de.vrlfr.stolpersteine.activity;
 
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -19,6 +16,10 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.database.StolpersteinBo;
 import de.vrlfr.stolpersteine.database.StolpersteineDao;

@@ -1,12 +1,13 @@
 package de.vrlfr.stolpersteine.fragment.list;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import de.vrlfr.stolpersteine.database.StolpersteinBo;
 
 public class StolpersteinListAdapter extends ArrayAdapter<StolpersteinBo> implements Filterable {

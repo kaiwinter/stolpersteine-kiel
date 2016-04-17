@@ -1,10 +1,10 @@
 package de.vrlfr.stolpersteine.database;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
 
 public final class StolpersteineDao {
 

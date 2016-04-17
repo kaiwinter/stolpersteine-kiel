@@ -1,9 +1,5 @@
 package de.vrlfr.stolpersteine.fragment.map;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -11,6 +7,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.database.StolpersteinBo;

@@ -122,5 +122,5 @@ public final class StolpersteinBo implements Parcelable {
 	@Override
 	public String toString() {
 		return name;
-	};
+	}
 }

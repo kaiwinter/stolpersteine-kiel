@@ -40,8 +40,6 @@ public final class ImageBioId {
 		ImageBioId other = (ImageBioId) obj;
 		if (bioId != other.bioId)
 			return false;
-		if (imageId != other.imageId)
-			return false;
-		return true;
+		return imageId == other.imageId;
 	}
 }

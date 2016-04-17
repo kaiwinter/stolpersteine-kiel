@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import de.vrlfr.stolpersteine.R;
 
 public class NavigationDrawerAdapter extends ArrayAdapter<String> {

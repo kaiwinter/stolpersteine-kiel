@@ -1,15 +1,5 @@
 package de.vrlfr.stolpersteine.activity.misc;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +14,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.FullscreenImageActivity;
@@ -90,7 +90,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 				public void onClick(View v) {
 					Intent intent = FullscreenImageActivity.newIntent(v.getContext(), imageResource,
 							stolpersteinBo.getAdresse());
-					((StolpersteinActivity) NamesRowItemAdapter.this.getContext()).startActivity(intent);
+					NamesRowItemAdapter.this.getContext().startActivity(intent);
 				}
 			});
 		}
@@ -134,7 +134,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 			}
 		}
 
-		File pdfFile = new File(((StolpersteinActivity) getContext()).getFilesDir(), "/biografie.pdf");
+		File pdfFile = new File(getContext().getFilesDir(), "/biografie.pdf");
 		Uri path = Uri.fromFile(pdfFile);
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

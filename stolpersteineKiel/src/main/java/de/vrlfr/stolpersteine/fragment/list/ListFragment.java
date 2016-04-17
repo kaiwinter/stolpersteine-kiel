@@ -1,9 +1,5 @@
 package de.vrlfr.stolpersteine.fragment.list;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +15,10 @@ import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.StolpersteinActivity;
