@@ -1,0 +1,174 @@
+package de.vrlfr.stolpersteine.activity;
+
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import android.content.Context;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import de.vrlfr.stolpersteine.R;
+import de.vrlfr.stolpersteine.database.StolpersteinBo;
+import de.vrlfr.stolpersteine.database.StolpersteineDao;
+import de.vrlfr.stolpersteine.fragment.about.AboutFragment;
+import de.vrlfr.stolpersteine.fragment.list.ListFragment;
+
+public class MainActivity extends BaseActivity {
+
+	private ListView drawerList;
+	private DrawerLayout drawerLayout;
+	private LinearLayout drawerLinearLayout;
+
+	private ActionBarDrawerToggle drawerToggle;
+	private Fragment mapFragment;
+	private ListFragment listFragment;
+	private ArrayList<StolpersteinBo> stolpersteine;
+	private BaseAdapter drawerListAdapter;
+
+	private AtomicInteger currentlySelectedFragment = new AtomicInteger(-1);
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		drawerList = (ListView) findViewById(R.id.navList);
+		drawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		drawerLinearLayout = (LinearLayout) findViewById(R.id.left_drawer);
+
+		addDrawerItems();
+		setupDrawer();
+
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
+
+		stolpersteine = StolpersteineDao.getStolpersteine(this);
+
+		if (savedInstanceState == null) {
+			// Selektion initial programmatisch setzen
+			drawerList.setItemChecked(0, true);
+			selectItem(0);
+		}
+	}
+
+	private void selectItem(int position) {
+		if (currentlySelectedFragment.getAndSet(position) == position) {
+			// bereits selektiert -> ignorieren
+			drawerLayout.closeDrawer(drawerLinearLayout);
+			return;
+		}
+		drawerListAdapter.notifyDataSetChanged();
+
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction ft = fragmentManager.beginTransaction();
+
+		if (position == 0) {
+			if (mapFragment == null) {
+				mapFragment = de.vrlfr.stolpersteine.fragment.map.MapFragment.newInstance(stolpersteine);
+			}
+			ft.replace(R.id.content_frame, mapFragment);
+		} else if (position == 1) {
+			if (listFragment == null) {
+				listFragment = ListFragment.newInstance(stolpersteine);
+			}
+			ft.replace(R.id.content_frame, listFragment);
+		} else if (position == 2) {
+			Fragment fragment = new AboutFragment();
+			ft.replace(R.id.content_frame, fragment);
+		} else {
+
+		}
+		ft.commit();
+		drawerLayout.closeDrawer(drawerLinearLayout);
+	}
+
+	private void addDrawerItems() {
+		String[] entries = { "Karte", "Personenregister", "Über" };
+		Integer[] imageId = { R.drawable.ic_map, R.drawable.ic_persons, R.drawable.ic_information };
+		drawerListAdapter = new NavigationDrawerAdapter(MainActivity.this, entries, imageId) {
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				View renderer = super.getView(position, convertView, parent);
+				if (position == drawerList.getCheckedItemPosition()) {
+					renderer.setBackgroundResource(android.R.color.darker_gray);
+				} else {
+					renderer.setBackgroundResource(android.R.color.transparent);
+				}
+				return renderer;
+			}
+		};
+		drawerList.setAdapter(drawerListAdapter);
+		drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				selectItem(position);
+			}
+		});
+	}
+
+	private void setupDrawer() {
+		drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
+			@Override
+			public void onDrawerOpened(View drawerView) {
+				super.onDrawerOpened(drawerView);
+				// Keyboard ausblenden
+				InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+				inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+						InputMethodManager.HIDE_NOT_ALWAYS);
+			}
+		};
+		drawerToggle.setDrawerIndicatorEnabled(true);
+		drawerLayout.setDrawerListener(drawerToggle);
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		drawerToggle.syncState();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Activate the navigation drawer toggle
+		if (drawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		drawerToggle.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	public void onBackPressed() {
+		// Wenn in anderen als dem Karten-Fragment zurück navigiert wird, erst zur Karte springen, bevor die App
+		// geschlossen wird.
+		if (drawerLayout.isDrawerOpen(drawerLinearLayout)) {
+			drawerLayout.closeDrawer(drawerLinearLayout);
+		} else if (drawerList.getCheckedItemPosition() != 0) {
+			drawerList.setItemChecked(0, true);
+			selectItem(0);
+		} else {
+			super.onBackPressed();
+		}
+	}
+}

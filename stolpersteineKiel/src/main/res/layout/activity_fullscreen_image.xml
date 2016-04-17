@@ -1,0 +1,5 @@
+<com.ortiz.touch.TouchImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/full_image"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/black" />

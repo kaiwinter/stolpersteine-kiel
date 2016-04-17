@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Stolpersteine Kiel</string>
+    <string name="menu_ueber">Info</string>
+    <string name="marker_das_bild_des_stolpersteins">Das Bild des Stolpersteins</string>
+    <string name="image_verlegt_am">"Verlegt am "</string>
+    <string name="drawer_close">Menüleiste schließen</string>
+    <string name="drawer_open">Menüleiste öffnen</string>
+    <string name="software_lizenzen">Open Source-Lizenzen</string>
+</resources>
