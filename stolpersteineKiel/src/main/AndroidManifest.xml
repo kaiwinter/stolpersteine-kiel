@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.vrlfr.stolpersteine"
-    android:versionCode="12"
-    android:versionName="1.2" >
+    android:versionCode="13"
+    android:versionName="1.3" >
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -50,9 +50,6 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="MAPS_KEY" />
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
