@@ -33,7 +33,7 @@ public final class StolpersteineDao {
 	}
 
 	private static ArrayList<StolpersteinBo> getStolpersteineInternal(SQLiteDatabase database) {
-		ArrayList<StolpersteinBo> stolperteine = new ArrayList<StolpersteinBo>();
+		ArrayList<StolpersteinBo> stolpersteine = new ArrayList<StolpersteinBo>();
 
 		Cursor cursor = null;
 		try {
@@ -41,7 +41,7 @@ public final class StolpersteineDao {
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
 
-				stolperteine.add(new StolpersteinBo(cursor.getString(0), // adresse
+				stolpersteine.add(new StolpersteinBo(cursor.getString(0), // adresse
 						cursor.getString(1), // verlegedatum
 						cursor.getString(2), // name
 						cursor.getString(3), // geboren
@@ -58,6 +58,6 @@ public final class StolpersteineDao {
 				cursor.close();
 			}
 		}
-		return stolperteine;
+		return stolpersteine;
 	}
 }

@@ -16,7 +16,7 @@ public final class ImageBioId {
 		return imageId;
 	}
 
-	public int getBiodId() {
+	public int getBioId() {
 		return bioId;
 	}
 

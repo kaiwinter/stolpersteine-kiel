@@ -86,7 +86,7 @@ public class MapFragment extends Fragment {
 	}
 
 	private void initMarkers(GoogleMap map) {
-		Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine = sortStolperteineByAdresse(stolpersteine);
+		Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine = sortStolpersteineByAdresse(stolpersteine);
 		addMapListeners(map, adresse2Stolpersteine);
 		new AddMarkerToMapAsync(getActivity(), map).execute(adresse2Stolpersteine);
 	}
@@ -186,7 +186,7 @@ public class MapFragment extends Fragment {
 	/**
 	 * Gibt eine Liste zurück Adresse -> Liste<Stolperstein>.
 	 */
-	private Map<String, ArrayList<StolpersteinBo>> sortStolperteineByAdresse(Collection<StolpersteinBo> stolpersteine) {
+	private Map<String, ArrayList<StolpersteinBo>> sortStolpersteineByAdresse(Collection<StolpersteinBo> stolpersteine) {
 
 		Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine = new HashMap<>();
 		for (StolpersteinBo stolperstein : stolpersteine) {
