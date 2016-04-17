@@ -1,9 +1,11 @@
 package de.vrlfr.stolpersteine.activity.misc;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -139,8 +141,14 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.setDataAndType(path, "application/pdf");
 
-		getContext().startActivity(intent);
-		pdfFile.deleteOnExit();
+		try {
+			getContext().startActivity(intent);
+			pdfFile.deleteOnExit();
+		} catch (ActivityNotFoundException e) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+			builder.setTitle("Fehler").setMessage("Es wird eine App benötigt, die PDFs anzeigen kann. Bitte installiere eine aus dem Play Store").setPositiveButton("OK", null);
+			builder.create().show();
+		}
 	}
 
 	private void copyFile(InputStream in, OutputStream out) throws IOException {
