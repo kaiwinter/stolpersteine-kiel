@@ -48,9 +48,4 @@ public class FullscreenImageActivity extends BaseActivity {
 		String adresse = extras.getString(INTENT_EXTRA_ADRESSE);
 		getSupportActionBar().setTitle(adresse);
 	}
-
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-	}
 }

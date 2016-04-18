@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity {
 	private ArrayList<StolpersteinBo> stolpersteine;
 	private BaseAdapter drawerListAdapter;
 
-	private AtomicInteger currentlySelectedFragment = new AtomicInteger(-1);
+	private final AtomicInteger currentlySelectedFragment = new AtomicInteger(-1);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
