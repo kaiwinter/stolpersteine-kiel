@@ -129,8 +129,10 @@ public class MainActivity extends BaseActivity {
 				// Keyboard ausblenden
 				InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-				inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-						InputMethodManager.HIDE_NOT_ALWAYS);
+				if (inputManager != null) {
+					inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+							InputMethodManager.HIDE_NOT_ALWAYS);
+				}
 			}
 		};
 		drawerToggle.setDrawerIndicatorEnabled(true);
