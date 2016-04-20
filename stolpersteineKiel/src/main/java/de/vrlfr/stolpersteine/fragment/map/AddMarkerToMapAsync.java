@@ -27,7 +27,7 @@ public class AddMarkerToMapAsync extends
 
 	@Override
 	protected Boolean doInBackground(Map<String, ArrayList<StolpersteinBo>>... adresse2Stolpersteine) {
-		// F�gt alle Stolpersteine zur GoogleMap hinzu.
+		// Fügt alle Stolpersteine zur GoogleMap hinzu.
 		for (Entry<String, ArrayList<StolpersteinBo>> adresse2Stolperstein : adresse2Stolpersteine[0].entrySet()) {
 			publishProgress(adresse2Stolperstein.getValue());
 		}
@@ -42,15 +42,15 @@ public class AddMarkerToMapAsync extends
 		LatLng latLon = null;
 		for (StolpersteinBo stolperstein : stolpersteine[0]) {
 			if (adresse == null) {
-				adresse = stolperstein.getAdresse();
-				latLon = new LatLng(stolperstein.getLatitude(), stolperstein.getLongitude());
+				adresse = stolperstein.adresse;
+				latLon = new LatLng(stolperstein.latitude, stolperstein.longitude);
 			}
 			if (!namen.isEmpty()) {
 				namen += "\n";
 			}
-			namen += stolperstein.getName();
+			namen += stolperstein.name;
 
-			if (stolperstein.getBioId() > -1) {
+			if (stolperstein.bioId > -1) {
 				hasBiografie = true;
 			}
 		}

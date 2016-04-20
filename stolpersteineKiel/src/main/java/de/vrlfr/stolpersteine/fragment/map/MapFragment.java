@@ -131,9 +131,9 @@ public class MapFragment extends Fragment {
 
                 StolpersteinBo stolperstein = adresse2Stolpersteine.get(marker.getTitle()).iterator().next();
                 ImageView imageView = ((ImageView) myContentsView.findViewById(R.id.marker_image));
-                if (stolperstein.getImageId() > -1) {
+                if (stolperstein.imageId > -1) {
 
-                    String uri = "@drawable/id" + stolperstein.getImageId();
+                    String uri = "@drawable/id" + stolperstein.imageId;
 
                     int imageResource = activity.getResources().getIdentifier(uri, null, activity.getPackageName());
                     if (imageResource != 0) {
@@ -215,7 +215,7 @@ public class MapFragment extends Fragment {
 
         Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine = new HashMap<>();
         for (StolpersteinBo stolperstein : stolpersteine) {
-            String adresse = stolperstein.getAdresse();
+            String adresse = stolperstein.adresse;
             ArrayList<StolpersteinBo> stolpersteineAnAdresse = adresse2Stolpersteine.get(adresse);
             if (stolpersteineAnAdresse == null) {
                 stolpersteineAnAdresse = new ArrayList<>();

@@ -17,15 +17,15 @@ public final class StolpersteinBo implements Parcelable {
 	public static final String IMAGE_ID_COLUMN = "image_id";
 	public static final String BIO_ID_COLUMN = "bio_id";
 
-	private final String adresse;
-	private final String verlegedatum;
-	private final String name;
-	private final String geboren;
-	private final String tod;
-	private final double longitude;
-	private final double latitude;
-	private final int imageId;
-	private final int bioId;
+	public final String adresse;
+	public final String verlegedatum;
+	public final String name;
+	public final String geboren;
+	public final String tod;
+	public final double longitude;
+	public final double latitude;
+	public final int imageId;
+	public final int bioId;
 
 	public StolpersteinBo(Parcel orig) {
 		adresse = orig.readString();
@@ -50,42 +50,6 @@ public final class StolpersteinBo implements Parcelable {
 		this.latitude = latitude;
 		this.imageId = imageId;
 		this.bioId = bioId;
-	}
-
-	public String getAdresse() {
-		return adresse;
-	}
-
-	public String getVerlegedatum() {
-		return verlegedatum;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getGeboren() {
-		return geboren;
-	}
-
-	public String getTod() {
-		return tod;
-	}
-
-	public double getLongitude() {
-		return longitude;
-	}
-
-	public double getLatitude() {
-		return latitude;
-	}
-
-	public int getImageId() {
-		return imageId;
-	}
-
-	public int getBioId() {
-		return bioId;
 	}
 
 	@Override

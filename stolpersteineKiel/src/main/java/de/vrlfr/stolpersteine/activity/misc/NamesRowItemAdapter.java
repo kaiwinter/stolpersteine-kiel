@@ -66,9 +66,9 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         Collection<StolpersteinBo> stolpersteine = stolpersteineList.get(position);
         String alleNamenString = "";
         for (StolpersteinBo stolperstein : stolpersteine) {
-            String name = stolperstein.getName();
-            String geboren = stolperstein.getGeboren();
-            String tod = stolperstein.getTod();
+            String name = stolperstein.name;
+            String geboren = stolperstein.geboren;
+            String tod = stolperstein.tod;
             String daten = geboren + " - " + tod;
 
             if (alleNamenString.length() > 0) {
@@ -80,7 +80,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 
         final StolpersteinBo stolpersteinBo = stolpersteine.iterator().next();
         ImageView stolpersteinBildImageView = (ImageView) convertView.findViewById(R.id.stolpersteinBild);
-        String uri = "@drawable/id" + stolpersteinBo.getImageId();
+        String uri = "@drawable/id" + stolpersteinBo.imageId;
         final int imageResource = getContext().getResources().getIdentifier(uri, null, getContext().getPackageName());
 
         if (imageResource > 0) {
@@ -91,28 +91,28 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
                 @Override
                 public void onClick(View v) {
                     Intent intent = FullscreenImageActivity.newIntent(v.getContext(), imageResource,
-                            stolpersteinBo.getAdresse());
+                            stolpersteinBo.adresse);
                     NamesRowItemAdapter.this.getContext().startActivity(intent);
                 }
             });
         }
 
         ImageView biografieImageViewPdf = (ImageView) convertView.findViewById(R.id.biografieBild);
-        if (stolpersteinBo.getBioId() == -1) {
+        if (stolpersteinBo.bioId == -1) {
             biografieImageViewPdf.setVisibility(View.GONE);
         } else {
             biografieImageViewPdf.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    openBiografiePdf(stolpersteinBo.getBioId());
+                    openBiografiePdf(stolpersteinBo.bioId);
                 }
             });
         }
 
         TextView verlegedatumCopyrightTf = (TextView) convertView.findViewById(R.id.detail_verlegedatum_copyright);
         verlegedatumCopyrightTf.setText(getContext().getString(R.string.image_verlegt_am)
-                + stolpersteinBo.getVerlegedatum());
+                + stolpersteinBo.verlegedatum);
 
         return convertView;
     }

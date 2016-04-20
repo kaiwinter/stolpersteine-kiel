@@ -38,7 +38,7 @@ public class StolpersteinListAdapter extends ArrayAdapter<StolpersteinBo> implem
 			if (constraint != null && constraint.length() > 0) {
 				ArrayList<StolpersteinBo> filterList = new ArrayList<>();
 				for (StolpersteinBo stolperstein : stolpersteineFilterList) {
-					if (stolperstein.getName().toLowerCase().contains(constraint.toString().toLowerCase())) {
+					if (stolperstein.name.toLowerCase().contains(constraint.toString().toLowerCase())) {
 						filterList.add(stolperstein);
 					}
 				}

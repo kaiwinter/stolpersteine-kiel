@@ -60,8 +60,8 @@ public class StolpersteinActivity extends BaseActivity {
         Map<ImageBioId, Collection<StolpersteinBo>> imageBio2Stolperstein = new HashMap<>();
         boolean hasBiografie = false;
         for (StolpersteinBo stolpersteinBo : parcelableArrayList) {
-            int imageId = stolpersteinBo.getImageId();
-            int bioId = stolpersteinBo.getBioId();
+            int imageId = stolpersteinBo.imageId;
+            int bioId = stolpersteinBo.bioId;
             ImageBioId imageBioId = new ImageBioId(imageId, bioId);
 
             Collection<StolpersteinBo> stolpersteine = imageBio2Stolperstein.get(imageBioId);
@@ -71,13 +71,13 @@ public class StolpersteinActivity extends BaseActivity {
             }
             stolpersteine.add(stolpersteinBo);
 
-            if (stolpersteinBo.getBioId() > -1) {
+            if (stolpersteinBo.bioId > -1) {
                 hasBiografie = true;
             }
         }
 
         StolpersteinBo stolperstein = parcelableArrayList.iterator().next();
-        String adresse = stolperstein.getAdresse();
+        String adresse = stolperstein.adresse;
         getSupportActionBar().setTitle(adresse);
 
         LinearLayout stolpersteinListView = (LinearLayout) findViewById(R.id.listViewFix);
