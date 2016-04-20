@@ -1,8 +1,12 @@
 package de.vrlfr.stolpersteine.fragment.map;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -36,186 +40,207 @@ import de.vrlfr.stolpersteine.activity.StolpersteinActivity;
 import de.vrlfr.stolpersteine.database.StolpersteinBo;
 
 public class MapFragment extends Fragment {
-	private static final String STOLPERSTEINE_EXTRA = "de.vrlfr.stolpersteine.StolpersteinList";
-	private static final LatLng KIEL = new LatLng(54.323396, 10.120184);
-	private List<StolpersteinBo> stolpersteine;
-	private View view;
+    private static final int REQUEST_LOCATION_PERMISSIONS = 1;
+    private static final String STOLPERSTEINE_EXTRA = "de.vrlfr.stolpersteine.StolpersteinList";
+    private static final LatLng KIEL = new LatLng(54.323396, 10.120184);
+    private List<StolpersteinBo> stolpersteine;
+    private View view;
+    private GoogleMap map;
 
-	public static MapFragment newInstance(ArrayList<StolpersteinBo> stolpersteine) {
-		MapFragment fragment = new MapFragment();
+    public static MapFragment newInstance(ArrayList<StolpersteinBo> stolpersteine) {
+        MapFragment fragment = new MapFragment();
 
-		Bundle arguments = new Bundle();
-		arguments.putParcelableArrayList(STOLPERSTEINE_EXTRA, stolpersteine);
-		fragment.setArguments(arguments);
+        Bundle arguments = new Bundle();
+        arguments.putParcelableArrayList(STOLPERSTEINE_EXTRA, stolpersteine);
+        fragment.setArguments(arguments);
 
-		return fragment;
-	}
+        return fragment;
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Bundle arguments = getArguments();
-		if (arguments != null) {
-			stolpersteine = arguments.getParcelableArrayList(STOLPERSTEINE_EXTRA);
-		}
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            stolpersteine = arguments.getParcelableArrayList(STOLPERSTEINE_EXTRA);
+        }
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		if (view == null) {
-			view = inflater.inflate(R.layout.fragment_map, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_map, container, false);
 
-			SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-			FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
-			beginTransaction.replace(R.id.map_container, mapFragment);
-			beginTransaction.commit();
-			mapFragment.getMapAsync(new OnMapReadyCallback() {
+            SupportMapFragment mapFragment = SupportMapFragment.newInstance();
+            FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
+            beginTransaction.replace(R.id.map_container, mapFragment);
+            beginTransaction.commit();
+            mapFragment.getMapAsync(new OnMapReadyCallback() {
 
-				@Override
-				public void onMapReady(GoogleMap map) {
-					map.setMyLocationEnabled(true);
-					map.getUiSettings().setRotateGesturesEnabled(false);
-					map.getUiSettings().setTiltGesturesEnabled(false);
-					CameraPosition cp = CameraPosition.builder().target(KIEL).zoom(12).build();
-					map.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
-					initMarkers(map);
-				}
-			});
-		}
-		return view;
-	}
+                @Override
+                public void onMapReady(GoogleMap map) {
+                    MapFragment.this.map = map;
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                            && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_LOCATION_PERMISSIONS);
+                    } else {
+                        map.setMyLocationEnabled(true);
+                    }
+                    map.getUiSettings().setRotateGesturesEnabled(false);
+                    map.getUiSettings().setTiltGesturesEnabled(false);
+                    CameraPosition cp = CameraPosition.builder().target(KIEL).zoom(12).build();
+                    map.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
+                    initMarkers(map);
+                }
+            });
+        }
+        return view;
+    }
 
-	private void initMarkers(GoogleMap map) {
-		Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine = sortStolpersteineByAdresse(stolpersteine);
-		addMapListeners(map, adresse2Stolpersteine);
-		new AddMarkerToMapAsync(getActivity(), map).execute(adresse2Stolpersteine);
-	}
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_LOCATION_PERMISSIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                map.setMyLocationEnabled(true);
+            }
+        }
+    }
 
-	private void addMapListeners(final GoogleMap map, final Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine) {
-		final boolean[] firstTime = { true };
-		map.setInfoWindowAdapter(new InfoWindowAdapter() {
-			@Override
-			public View getInfoContents(Marker marker) {
-				Activity activity = getActivity();
-				LayoutInflater inflater = LayoutInflater.from(activity);
-				View myContentsView = inflater.inflate(R.layout.marker, null);
-				TextView tvTitle = ((TextView) myContentsView.findViewById(R.id.marker_title));
-				tvTitle.setText(marker.getTitle());
-				TextView tvSnippet = ((TextView) myContentsView.findViewById(R.id.marker_snippet));
-				tvSnippet.setText(marker.getSnippet());
+    private void initMarkers(GoogleMap map) {
+        Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine = sortStolpersteineByAdresse(stolpersteine);
+        addMapListeners(map, adresse2Stolpersteine);
+        new AddMarkerToMapAsync(getActivity(), map).execute(adresse2Stolpersteine);
+    }
 
-				StolpersteinBo stolperstein = adresse2Stolpersteine.get(marker.getTitle()).iterator().next();
-				ImageView imageView = ((ImageView) myContentsView.findViewById(R.id.marker_image));
-				if (stolperstein.getImageId() > -1) {
+    private void addMapListeners(final GoogleMap map, final Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine) {
+        final boolean[] firstTime = {true};
+        map.setInfoWindowAdapter(new InfoWindowAdapter() {
+            @Override
+            public View getInfoContents(Marker marker) {
+                Activity activity = getActivity();
+                LayoutInflater inflater = LayoutInflater.from(activity);
+                View myContentsView = inflater.inflate(R.layout.marker, null);
+                TextView tvTitle = ((TextView) myContentsView.findViewById(R.id.marker_title));
+                tvTitle.setText(marker.getTitle());
+                TextView tvSnippet = ((TextView) myContentsView.findViewById(R.id.marker_snippet));
+                tvSnippet.setText(marker.getSnippet());
 
-					String uri = "@drawable/id" + stolperstein.getImageId();
+                StolpersteinBo stolperstein = adresse2Stolpersteine.get(marker.getTitle()).iterator().next();
+                ImageView imageView = ((ImageView) myContentsView.findViewById(R.id.marker_image));
+                if (stolperstein.getImageId() > -1) {
 
-					int imageResource = activity.getResources().getIdentifier(uri, null, activity.getPackageName());
-					if (imageResource != 0) {
-						if (firstTime[0]) {
-							// if it's the first time, load the image with the callback set
-							firstTime[0] = false;
-							Picasso.with(activity).load(imageResource).resize(128, 128).centerCrop()
-									.into(imageView, new InfoWindowRefresher(marker));
-						} else {
+                    String uri = "@drawable/id" + stolperstein.getImageId();
 
-							Picasso.with(activity).load(imageResource).resize(128, 128).centerCrop().into(imageView);
-							firstTime[0] = true;
-						}
-					}
-				} else {
-					imageView.setVisibility(View.GONE);
-				}
+                    int imageResource = activity.getResources().getIdentifier(uri, null, activity.getPackageName());
+                    if (imageResource != 0) {
+                        if (firstTime[0]) {
+                            // if it's the first time, load the image with the callback set
+                            firstTime[0] = false;
+                            Picasso.with(activity).load(imageResource).resize(128, 128).centerCrop()
+                                    .into(imageView, new InfoWindowRefresher(marker));
+                        } else {
 
-				return myContentsView;
-			}
+                            Picasso.with(activity).load(imageResource).resize(128, 128).centerCrop().into(imageView);
+                            firstTime[0] = true;
+                        }
+                    }
+                } else {
+                    imageView.setVisibility(View.GONE);
+                }
 
-			@Override
-			public View getInfoWindow(Marker marker) {
-				return null;
-			}
-		});
+                return myContentsView;
+            }
 
-		OnInfoWindowClickListener onInfoWindowClickListener = new OnInfoWindowClickListener() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+        });
 
-			@Override
-			public void onInfoWindowClick(Marker marker) {
-				LatLng latLng = marker.getPosition();
-				ArrayList<StolpersteinBo> arrayList = adresse2Stolpersteine.get(marker.getTitle());
-				Intent intent = StolpersteinActivity.newIntent(getActivity(), arrayList, latLng);
-				startActivity(intent);
-			}
-		};
-		map.setOnInfoWindowClickListener(onInfoWindowClickListener);
+        OnInfoWindowClickListener onInfoWindowClickListener = new OnInfoWindowClickListener() {
 
-		final Marker[] lastOpened = { null };
-		OnMarkerClickListener onMarkerClickListener = new OnMarkerClickListener() {
-			@Override
-			public boolean onMarkerClick(Marker marker) {
-				// Check if there is an open info window
-				if (lastOpened[0] != null) {
-					// Is the marker the same marker that was already open
-					if (lastOpened.equals(marker)) {
-						// Return so that the info window isn't opened again
-						return true;
-					}
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                LatLng latLng = marker.getPosition();
+                ArrayList<StolpersteinBo> arrayList = adresse2Stolpersteine.get(marker.getTitle());
+                Intent intent = StolpersteinActivity.newIntent(getActivity(), arrayList, latLng);
+                startActivity(intent);
+            }
+        };
+        map.setOnInfoWindowClickListener(onInfoWindowClickListener);
 
-					// Close the info window
-					lastOpened[0].hideInfoWindow();
-				}
+        final Marker[] lastOpened = {null};
+        OnMarkerClickListener onMarkerClickListener = new OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                // Check if there is an open info window
+                if (lastOpened[0] != null) {
+                    // Is the marker the same marker that was already open
+                    if (lastOpened.equals(marker)) {
+                        // Return so that the info window isn't opened again
+                        return true;
+                    }
 
-				// Open the info window for the marker
-				marker.showInfoWindow();
+                    // Close the info window
+                    lastOpened[0].hideInfoWindow();
+                }
 
-				// Re-assign the last opened such that we can close it later
-				lastOpened[0] = marker;
+                // Open the info window for the marker
+                marker.showInfoWindow();
 
-				float zoom = map.getCameraPosition().zoom;
-				LatLng lastPosition = new LatLng(marker.getPosition().latitude + 90 / Math.pow(2, zoom),
-						marker.getPosition().longitude);
-				CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(lastPosition, zoom);
-				map.animateCamera(cu);
+                // Re-assign the last opened such that we can close it later
+                lastOpened[0] = marker;
 
-				return true;
-			}
-		};
+                float zoom = map.getCameraPosition().zoom;
+                LatLng lastPosition = new LatLng(marker.getPosition().latitude + 90 / Math.pow(2, zoom),
+                        marker.getPosition().longitude);
+                CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(lastPosition, zoom);
+                map.animateCamera(cu);
 
-		map.setOnMarkerClickListener(onMarkerClickListener);
-	}
+                return true;
+            }
+        };
 
-	/**
-	 * Gibt eine Liste zurück Adresse -> Liste<Stolperstein>.
-	 */
-	private Map<String, ArrayList<StolpersteinBo>> sortStolpersteineByAdresse(Collection<StolpersteinBo> stolpersteine) {
+        map.setOnMarkerClickListener(onMarkerClickListener);
+    }
 
-		Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine = new HashMap<>();
-		for (StolpersteinBo stolperstein : stolpersteine) {
-			String adresse = stolperstein.getAdresse();
-			ArrayList<StolpersteinBo> stolpersteineAnAdresse = adresse2Stolpersteine.get(adresse);
-			if (stolpersteineAnAdresse == null) {
-				stolpersteineAnAdresse = new ArrayList<>();
-				adresse2Stolpersteine.put(adresse, stolpersteineAnAdresse);
-			}
-			stolpersteineAnAdresse.add(stolperstein);
-		}
+    /**
+     * Gibt eine Liste zurück Adresse -> Liste<Stolperstein>.
+     */
+    private Map<String, ArrayList<StolpersteinBo>> sortStolpersteineByAdresse(Collection<StolpersteinBo> stolpersteine) {
 
-		return adresse2Stolpersteine;
-	}
+        Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine = new HashMap<>();
+        for (StolpersteinBo stolperstein : stolpersteine) {
+            String adresse = stolperstein.getAdresse();
+            ArrayList<StolpersteinBo> stolpersteineAnAdresse = adresse2Stolpersteine.get(adresse);
+            if (stolpersteineAnAdresse == null) {
+                stolpersteineAnAdresse = new ArrayList<>();
+                adresse2Stolpersteine.put(adresse, stolpersteineAnAdresse);
+            }
+            stolpersteineAnAdresse.add(stolperstein);
+        }
 
-	private class InfoWindowRefresher implements Callback {
-		private final Marker markerToRefresh;
+        return adresse2Stolpersteine;
+    }
 
-		private InfoWindowRefresher(Marker markerToRefresh) {
-			this.markerToRefresh = markerToRefresh;
-		}
+    private class InfoWindowRefresher implements Callback {
+        private final Marker markerToRefresh;
 
-		@Override
-		public void onSuccess() {
-			markerToRefresh.showInfoWindow();
-		}
+        private InfoWindowRefresher(Marker markerToRefresh) {
+            this.markerToRefresh = markerToRefresh;
+        }
 
-		@Override
-		public void onError() {
-		}
-	}
+        @Override
+        public void onSuccess() {
+            markerToRefresh.showInfoWindow();
+        }
+
+        @Override
+        public void onError() {
+        }
+    }
 }
