@@ -179,12 +179,6 @@ public class MapFragment extends Fragment {
             public boolean onMarkerClick(Marker marker) {
                 // Check if there is an open info window
                 if (lastOpened[0] != null) {
-                    // Is the marker the same marker that was already open
-                    if (lastOpened.equals(marker)) {
-                        // Return so that the info window isn't opened again
-                        return true;
-                    }
-
                     // Close the info window
                     lastOpened[0].hideInfoWindow();
                 }
