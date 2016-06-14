@@ -12,14 +12,6 @@ public final class ImageBioId {
 		this.bioId = bioId;
 	}
 
-	public int getImageId() {
-		return imageId;
-	}
-
-	public int getBioId() {
-		return bioId;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
