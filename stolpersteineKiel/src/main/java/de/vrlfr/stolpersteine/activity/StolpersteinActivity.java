@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -55,10 +56,10 @@ public class StolpersteinActivity extends BaseActivity {
         }
     }
 
-    private void handleExtras(Bundle extras) {
+    private void handleExtras(final Bundle extras) {
         List<StolpersteinBo> parcelableArrayList = extras.getParcelableArrayList(STOLPERSTEINE_EXTRA);
         Map<ImageBioId, Collection<StolpersteinBo>> imageBio2Stolperstein = new HashMap<>();
-        boolean hasBiografie = false;
+        final boolean[] hasBiografie = {false};
         for (StolpersteinBo stolpersteinBo : parcelableArrayList) {
             int imageId = stolpersteinBo.imageId;
             int bioId = stolpersteinBo.bioId;
@@ -72,12 +73,12 @@ public class StolpersteinActivity extends BaseActivity {
             stolpersteine.add(stolpersteinBo);
 
             if (stolpersteinBo.bioId > -1) {
-                hasBiografie = true;
+                hasBiografie[0] = true;
             }
         }
 
         StolpersteinBo stolperstein = parcelableArrayList.iterator().next();
-        String adresse = stolperstein.adresse;
+        final String adresse = stolperstein.adresse;
         getSupportActionBar().setTitle(adresse);
 
         LinearLayout stolpersteinListView = (LinearLayout) findViewById(R.id.listViewFix);
@@ -87,25 +88,31 @@ public class StolpersteinActivity extends BaseActivity {
             stolpersteinListView.addView(convertView);
         }
 
-        GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.staticmap)).getMap();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            map.setMyLocationEnabled(false);
-        }
+        OnMapReadyCallback onMapReady = new OnMapReadyCallback() {
 
-        map.getUiSettings().setAllGesturesEnabled(false);
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                if (ActivityCompat.checkSelfPermission(StolpersteinActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(StolpersteinActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    googleMap.setMyLocationEnabled(false);
+                }
 
-        LatLng latLon = extras.getParcelable(STOLPERSTEINE_LATLNG_EXTRA);
-        CameraPosition cp = CameraPosition.builder().target(latLon).zoom(15).build();
-        map.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
+                googleMap.getUiSettings().setAllGesturesEnabled(false);
 
-        int drawable = hasBiografie ? R.drawable.stolperstein_bio : R.drawable.stolperstein;
+                LatLng latLon = extras.getParcelable(STOLPERSTEINE_LATLNG_EXTRA);
+                CameraPosition cp = CameraPosition.builder().target(latLon).zoom(15).build();
+                googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
 
-        MarkerOptions marker = new MarkerOptions() //
-                .position(latLon) //
-                .title(adresse) //
-                .icon(BitmapDescriptorFactory.fromResource(drawable));
+                int drawable = hasBiografie[0] ? R.drawable.stolperstein_bio : R.drawable.stolperstein;
 
-        map.addMarker(marker);
+                MarkerOptions marker = new MarkerOptions() //
+                        .position(latLon) //
+                        .title(adresse) //
+                        .icon(BitmapDescriptorFactory.fromResource(drawable));
+
+                googleMap.addMarker(marker);
+            }
+        };
+        ((MapFragment) getFragmentManager().findFragmentById(R.id.staticmap)).getMapAsync(onMapReady);
     }
 }
