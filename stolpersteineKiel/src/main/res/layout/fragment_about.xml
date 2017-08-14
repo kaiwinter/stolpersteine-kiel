@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autoLink="web"
-            android:text="http://www.kiel.de/kultur/stadtgeschichte/stolpersteine/"
+            android:text="https://www.kiel.de/de/kiel_zukunft/stadtgeschichte/stolpersteine/"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
