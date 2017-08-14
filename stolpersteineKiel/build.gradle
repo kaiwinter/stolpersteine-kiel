@@ -8,7 +8,6 @@ android {
         applicationId "de.vrlfr.stolpersteine"
         minSdkVersion 11
         targetSdkVersion 23
-        multiDexEnabled true
     }
 
     buildTypes {
@@ -24,9 +23,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:multidex:1.0.1'
-
-    compile 'com.google.android.gms:play-services:10.0.1'
+    compile 'com.google.android.gms:play-services-maps:9.4.0'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
 
