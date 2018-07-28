@@ -88,6 +88,7 @@ public class MapFragment extends Fragment {
                     }
                     map.getUiSettings().setRotateGesturesEnabled(false);
                     map.getUiSettings().setTiltGesturesEnabled(false);
+                    map.getUiSettings().setZoomControlsEnabled(true);
                     CameraPosition cp = CameraPosition.builder().target(KIEL).zoom(12).build();
                     map.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
                     initMarkers(map);
