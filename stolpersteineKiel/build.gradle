@@ -29,5 +29,5 @@ dependencies {
 
     implementation 'com.github.thebestpol:ParallaxScroll:12665d54d5'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'de.psdev.licensesdialog:licensesdialog:1.8.1'
+    implementation 'de.psdev.licensesdialog:licensesdialog:1.8.3'
 }
