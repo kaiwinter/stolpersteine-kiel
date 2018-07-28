@@ -16,12 +16,12 @@ public final class GoogleMapLicense extends License {
 
 	@Override
 	public String readSummaryTextFromResources(Context context) {
-		return GoogleApiAvailability.getInstance().getOpenSourceSoftwareLicenseInfo(context);
+		return "";
 	}
 
 	@Override
 	public String readFullTextFromResources(Context context) {
-		return GoogleApiAvailability.getInstance().getOpenSourceSoftwareLicenseInfo(context);
+		return "";
 	}
 
 	@Override
