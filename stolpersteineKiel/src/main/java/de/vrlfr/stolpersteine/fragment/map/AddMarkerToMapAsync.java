@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -17,11 +18,11 @@ import de.vrlfr.stolpersteine.database.StolpersteinBo;
 
 public class AddMarkerToMapAsync extends
 		AsyncTask<Map<String, ArrayList<StolpersteinBo>>, ArrayList<StolpersteinBo>, Boolean> {
-	private final Activity context;
+	private final WeakReference<Activity> context;
 	private final GoogleMap map;
 
 	public AddMarkerToMapAsync(Activity activity, GoogleMap map) {
-		this.context = activity;
+		this.context = new WeakReference<>(activity);
 		this.map = map;
 	}
 
@@ -56,13 +57,16 @@ public class AddMarkerToMapAsync extends
 				.icon(BitmapDescriptorFactory.fromResource(R.drawable.stolperstein)) //
 				.snippet(namen);
 
-		context.runOnUiThread(new Runnable() {
+		Activity activity = context.get();
+		if (activity != null) {
+			activity.runOnUiThread(new Runnable() {
 
-			@Override
-			public void run() {
-				// Muss im UI Thread ausgeführt werden
-				map.addMarker(marker);
-			}
-		});
+				@Override
+				public void run() {
+					// Muss im UI Thread ausgeführt werden
+					map.addMarker(marker);
+				}
+			});
+		}
 	}
 }
