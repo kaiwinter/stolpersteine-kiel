@@ -45,10 +45,10 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		drawerList = (ListView) findViewById(R.id.navList);
+		drawerList = findViewById(R.id.navList);
 		drawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		drawerLinearLayout = (LinearLayout) findViewById(R.id.left_drawer);
+		drawerLayout = findViewById(R.id.drawer_layout);
+		drawerLinearLayout = findViewById(R.id.left_drawer);
 
 		addDrawerItems();
 		setupDrawer();

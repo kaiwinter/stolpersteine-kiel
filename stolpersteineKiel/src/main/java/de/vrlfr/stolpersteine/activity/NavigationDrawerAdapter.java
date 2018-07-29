@@ -34,8 +34,8 @@ public class NavigationDrawerAdapter extends ArrayAdapter<String> {
 			viewHolder = new NavigationDrawerViewHolder();
 			view.setTag(viewHolder);
 
-			viewHolder.imageView = (ImageView) view.findViewById(R.id.img);
-			viewHolder.textView = (TextView) view.findViewById(R.id.txt);
+			viewHolder.imageView = view.findViewById(R.id.img);
+			viewHolder.textView = view.findViewById(R.id.txt);
 		} else {
 			viewHolder = (NavigationDrawerViewHolder) view.getTag();
 		}

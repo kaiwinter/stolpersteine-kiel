@@ -53,8 +53,8 @@ public class ListFragment extends Fragment implements OnQueryTextListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_list, container, false);
 
-		SearchView searchView = (SearchView) rootView.findViewById(R.id.fragment_list_searchbar);
-		ListView stolpersteinList = (ListView) rootView.findViewById(R.id.stolperstein_liste);
+		SearchView searchView = rootView.findViewById(R.id.fragment_list_searchbar);
+		ListView stolpersteinList = rootView.findViewById(R.id.stolperstein_liste);
 
 		adapter = new StolpersteinListAdapter(getActivity(), stolpersteine);
 		searchView.setOnQueryTextListener(this);

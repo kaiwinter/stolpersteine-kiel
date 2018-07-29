@@ -125,13 +125,13 @@ public class MapFragment extends Fragment {
                 Activity activity = getActivity();
                 LayoutInflater inflater = LayoutInflater.from(activity);
                 View myContentsView = inflater.inflate(R.layout.marker, null);
-                TextView tvTitle = ((TextView) myContentsView.findViewById(R.id.marker_title));
+                TextView tvTitle = myContentsView.findViewById(R.id.marker_title);
                 tvTitle.setText(marker.getTitle());
-                TextView tvSnippet = ((TextView) myContentsView.findViewById(R.id.marker_snippet));
+                TextView tvSnippet = myContentsView.findViewById(R.id.marker_snippet);
                 tvSnippet.setText(marker.getSnippet());
 
                 StolpersteinBo stolperstein = adresse2Stolpersteine.get(marker.getTitle()).iterator().next();
-                ImageView imageView = ((ImageView) myContentsView.findViewById(R.id.marker_image));
+                ImageView imageView = myContentsView.findViewById(R.id.marker_image);
                 if (stolperstein.imageId > -1) {
 
                     String uri = "@drawable/id" + stolperstein.imageId;

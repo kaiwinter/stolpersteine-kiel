@@ -40,7 +40,7 @@ public class FullscreenImageActivity extends BaseActivity {
 
 	private void handleExtras(Bundle extras) {
 		int imageId = extras.getInt(INTENT_EXTRA_IMAGE_RESSOURCE_ID);
-		TouchImageView imageView = (TouchImageView) findViewById(R.id.full_image);
+		TouchImageView imageView = findViewById(R.id.full_image);
 		imageView.setMaxZoom(6);
 
 		Picasso.with(this).load(imageId).error(android.R.drawable.ic_delete).into(imageView);

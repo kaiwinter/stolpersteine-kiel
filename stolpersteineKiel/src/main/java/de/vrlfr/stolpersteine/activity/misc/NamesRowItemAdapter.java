@@ -57,7 +57,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
             viewHolder = new MotionRowViewHolder();
             convertView.setTag(viewHolder);
 
-            viewHolder.textViewNamen = (TextView) convertView.findViewById(R.id.stolpersteinNamen);
+            viewHolder.textViewNamen = convertView.findViewById(R.id.stolpersteinNamen);
 
         } else {
             viewHolder = (MotionRowViewHolder) convertView.getTag();
@@ -79,7 +79,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         viewHolder.textViewNamen.setText(Html.fromHtml(alleNamenString));
 
         final StolpersteinBo stolpersteinBo = stolpersteine.iterator().next();
-        ImageView stolpersteinBildImageView = (ImageView) convertView.findViewById(R.id.stolpersteinBild);
+        ImageView stolpersteinBildImageView = convertView.findViewById(R.id.stolpersteinBild);
         String uri = "@drawable/id" + stolpersteinBo.imageId;
         final int imageResource = getContext().getResources().getIdentifier(uri, null, getContext().getPackageName());
 
@@ -97,7 +97,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
             });
         }
 
-        ImageView biografieImageViewPdf = (ImageView) convertView.findViewById(R.id.biografieBild);
+        ImageView biografieImageViewPdf = convertView.findViewById(R.id.biografieBild);
         if (stolpersteinBo.bioId == -1) {
             biografieImageViewPdf.setVisibility(View.GONE);
         } else {
@@ -110,9 +110,8 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
             });
         }
 
-        TextView verlegedatumCopyrightTf = (TextView) convertView.findViewById(R.id.detail_verlegedatum_copyright);
-        verlegedatumCopyrightTf.setText(getContext().getString(R.string.image_verlegt_am)
-                + stolpersteinBo.verlegedatum);
+        TextView verlegedatumCopyrightTf = convertView.findViewById(R.id.detail_verlegedatum_copyright);
+        verlegedatumCopyrightTf.setText(getContext().getString(R.string.image_verlegt_am) + stolpersteinBo.verlegedatum);
 
         return convertView;
     }

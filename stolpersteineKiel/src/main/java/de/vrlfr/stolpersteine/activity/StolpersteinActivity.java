@@ -81,7 +81,7 @@ public class StolpersteinActivity extends BaseActivity {
         final String adresse = stolperstein.adresse;
         getSupportActionBar().setTitle(adresse);
 
-        LinearLayout stolpersteinListView = (LinearLayout) findViewById(R.id.listViewFix);
+        LinearLayout stolpersteinListView = findViewById(R.id.listViewFix);
         NamesRowItemAdapter adapter = new NamesRowItemAdapter(this, imageBio2Stolperstein.values());
         for (int i = 0; i < adapter.getCount(); i++) {
             View convertView = adapter.getView(i, null, stolpersteinListView);
