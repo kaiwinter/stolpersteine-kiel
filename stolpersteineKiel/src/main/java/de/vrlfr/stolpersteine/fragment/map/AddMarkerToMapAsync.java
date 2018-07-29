@@ -36,7 +36,6 @@ public class AddMarkerToMapAsync extends
 
 	@Override
 	protected void onProgressUpdate(ArrayList<StolpersteinBo>... stolpersteine) {
-		boolean hasBiografie = false;
 		String namen = "";
 		String adresse = null;
 		LatLng latLon = null;
@@ -49,23 +48,12 @@ public class AddMarkerToMapAsync extends
 				namen += "\n";
 			}
 			namen += stolperstein.name;
-
-			if (stolperstein.bioId > -1) {
-				hasBiografie = true;
-			}
-		}
-
-		int drawable;
-		if (hasBiografie) {
-			drawable = R.drawable.stolperstein_bio;
-		} else {
-			drawable = R.drawable.stolperstein;
 		}
 
 		final MarkerOptions marker = new MarkerOptions() //
 				.position(latLon) //
 				.title(adresse) //
-				.icon(BitmapDescriptorFactory.fromResource(drawable)) //
+				.icon(BitmapDescriptorFactory.fromResource(R.drawable.stolperstein)) //
 				.snippet(namen);
 
 		context.runOnUiThread(new Runnable() {

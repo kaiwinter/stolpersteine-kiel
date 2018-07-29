@@ -103,12 +103,10 @@ public class StolpersteinActivity extends BaseActivity {
                 CameraPosition cp = CameraPosition.builder().target(latLon).zoom(15).build();
                 googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
 
-                int drawable = hasBiografie[0] ? R.drawable.stolperstein_bio : R.drawable.stolperstein;
-
                 MarkerOptions marker = new MarkerOptions() //
                         .position(latLon) //
                         .title(adresse) //
-                        .icon(BitmapDescriptorFactory.fromResource(drawable));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.stolperstein));
 
                 googleMap.addMarker(marker);
             }
