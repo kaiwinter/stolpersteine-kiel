@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,10 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.commonsware.cwac.provider.StreamProvider;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -35,6 +33,8 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 
     private static final String TAG = NamesRowItemAdapter.class.getSimpleName();
     private static final int ROW_ID = R.layout.stolperstein_listview_item;
+    private static final String AUTHORITY = "de.vrlfr.stolpersteine.provider";
+    private static final Uri PROVIDER = Uri.parse("content://" + AUTHORITY);
 
     private final List<Collection<StolpersteinBo>> stolpersteineList;
 
@@ -118,43 +118,21 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
     }
 
     private void openBiografiePdf(int bioId) {
-        FileOutputStream openFileOutput = null;
-        try {
-            openFileOutput = getContext().openFileOutput("biografie.pdf", Context.MODE_WORLD_READABLE);
-            copyFile(getContext().getAssets().open("id" + bioId + ".pdf"), openFileOutput);
-        } catch (IOException e) {
-            Log.e(TAG, e.getMessage());
-        } finally {
-            if (openFileOutput != null) {
-                try {
-                    openFileOutput.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
-        }
+        Uri path = PROVIDER
+                .buildUpon()
+                .appendPath(StreamProvider.getUriPrefix(AUTHORITY))
+                .appendPath("assets/id" + bioId + ".pdf")
+                .build();
 
-        File pdfFile = new File(getContext().getFilesDir(), "/biografie.pdf");
-        Uri path = Uri.fromFile(pdfFile);
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.setDataAndType(path, "application/pdf");
+        Intent intent = new Intent(Intent.ACTION_VIEW, path);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
         try {
             getContext().startActivity(intent);
-            pdfFile.deleteOnExit();
         } catch (ActivityNotFoundException e) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle("Fehler").setMessage("Es wird eine App benötigt, die PDFs anzeigen kann. Bitte installiere eine aus dem Play Store").setPositiveButton("OK", null);
             builder.create().show();
-        }
-    }
-
-    private void copyFile(InputStream in, OutputStream out) throws IOException {
-        byte[] buffer = new byte[1024];
-        int read;
-        while ((read = in.read(buffer)) != -1) {
-            out.write(buffer, 0, read);
         }
     }
 
