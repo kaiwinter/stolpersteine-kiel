@@ -18,9 +18,6 @@ import android.widget.TextView;
 import com.commonsware.cwac.provider.StreamProvider;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -31,7 +28,6 @@ import de.vrlfr.stolpersteine.database.StolpersteinBo;
 
 public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 
-    private static final String TAG = NamesRowItemAdapter.class.getSimpleName();
     private static final int ROW_ID = R.layout.stolperstein_listview_item;
     private static final String AUTHORITY = "de.vrlfr.stolpersteine.provider";
     private static final Uri PROVIDER = Uri.parse("content://" + AUTHORITY);
@@ -66,15 +62,11 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         Collection<StolpersteinBo> stolpersteine = stolpersteineList.get(position);
         String alleNamenString = "";
         for (StolpersteinBo stolperstein : stolpersteine) {
-            String name = stolperstein.name;
-            String geboren = stolperstein.geboren;
-            String tod = stolperstein.tod;
-            String daten = geboren + " - " + tod;
 
             if (alleNamenString.length() > 0) {
                 alleNamenString += "<br/>";
             }
-            alleNamenString += "<b>" + name + "</b> " + daten;
+            alleNamenString += "<b>" + stolperstein.name + "</b> " + stolperstein.geboren + " - " + stolperstein.tod;
         }
         viewHolder.textViewNamen.setText(Html.fromHtml(alleNamenString));
 

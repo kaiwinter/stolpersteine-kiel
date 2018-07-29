@@ -89,8 +89,6 @@ public class MainActivity extends BaseActivity {
 		} else if (position == 2) {
 			Fragment fragment = new AboutFragment();
 			ft.replace(R.id.content_frame, fragment);
-		} else {
-
 		}
 		ft.commit();
 		drawerLayout.closeDrawer(drawerLinearLayout);

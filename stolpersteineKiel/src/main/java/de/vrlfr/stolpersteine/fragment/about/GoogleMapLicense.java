@@ -2,8 +2,6 @@ package de.vrlfr.stolpersteine.fragment.about;
 
 import android.content.Context;
 
-import com.google.android.gms.common.GoogleApiAvailability;
-
 import de.psdev.licensesdialog.licenses.License;
 
 @SuppressWarnings("serial")

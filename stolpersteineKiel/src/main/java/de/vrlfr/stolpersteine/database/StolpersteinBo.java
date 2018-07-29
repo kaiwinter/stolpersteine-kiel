@@ -6,7 +6,6 @@ import android.os.Parcelable;
 public final class StolpersteinBo implements Parcelable {
 	public static final String TABLE_NAME = "stolperstein";
 
-	public static final String ID = "id";
 	public static final String ADRESSE_COLUMN = "adresse";
 	public static final String VERLEGEDATUM = "verlegedatum";
 	public static final String NAME_COLUMN = "name";
