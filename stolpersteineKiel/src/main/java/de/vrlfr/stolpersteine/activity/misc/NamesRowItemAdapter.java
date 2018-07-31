@@ -1,11 +1,8 @@
 package de.vrlfr.stolpersteine.activity.misc;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.commonsware.cwac.provider.StreamProvider;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,13 +20,12 @@ import java.util.List;
 
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.FullscreenImageActivity;
+import de.vrlfr.stolpersteine.activity.FullscreenPDFActivity;
 import de.vrlfr.stolpersteine.database.StolpersteinBo;
 
 public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 
     private static final int ROW_ID = R.layout.stolperstein_listview_item;
-    private static final String AUTHORITY = "de.vrlfr.stolpersteine.provider";
-    private static final Uri PROVIDER = Uri.parse("content://" + AUTHORITY);
 
     private final List<Collection<StolpersteinBo>> stolpersteineList;
 
@@ -97,7 +92,8 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 
                 @Override
                 public void onClick(View v) {
-                    openBiografiePdf(stolpersteinBo.bioId);
+                    Intent intent = FullscreenPDFActivity.newIntent(v.getContext(), stolpersteinBo.bioId);
+                    NamesRowItemAdapter.this.getContext().startActivity(intent);
                 }
             });
         }
@@ -106,25 +102,6 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         verlegedatumCopyrightTf.setText(getContext().getString(R.string.image_verlegt_am) + stolpersteinBo.verlegedatum);
 
         return convertView;
-    }
-
-    private void openBiografiePdf(int bioId) {
-        Uri path = PROVIDER
-                .buildUpon()
-                .appendPath(StreamProvider.getUriPrefix(AUTHORITY))
-                .appendPath("assets/id" + bioId + ".pdf")
-                .build();
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, path);
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-        try {
-            getContext().startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Fehler").setMessage("Es wird eine App benötigt, die PDFs anzeigen kann. Bitte installiere eine aus dem Play Store").setPositiveButton("OK", null);
-            builder.create().show();
-        }
     }
 
     @Override

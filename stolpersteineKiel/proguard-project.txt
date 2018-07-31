@@ -48,3 +48,6 @@
 -keep class android.net.http.** { *; }
 -keepclassmembers class android.net.http.** {*;}
 -dontwarn android.net.**
+
+# https://github.com/barteksc/AndroidPdfViewer
+-keep class com.shockwave.**
