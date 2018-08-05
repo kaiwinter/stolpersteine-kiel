@@ -41,9 +41,11 @@ public final class SQLiteHelper extends SQLiteOpenHelper {
     public SQLiteDatabase openDatabase() {
         Log.i(TAG, "openDatabase()");
         File dbFile = context.getDatabasePath(DB_NAME);
+        boolean dbFileExists = dbFile.exists();
+        getReadableDatabase().close();
 
         SQLiteDatabase database;
-        if (!dbFile.exists()) {
+        if (!dbFileExists) {
             try {
                 Log.d(TAG, "Copying database initially");
                 copyDatabase(dbFile);
