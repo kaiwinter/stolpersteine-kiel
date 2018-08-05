@@ -24,16 +24,7 @@ public final class StolpersteineDao {
 			dbHelper = SQLiteHelper.getInstance(context);
 			database = dbHelper.openDatabase();
 
-			ArrayList<StolpersteinBo> stolpersteinBos;
-			try {
-				stolpersteinBos = getStolpersteineInternal(database);
-			} catch (SQLiteException e) {
-				Log.e(TAG, "Caught SQLiteExeption: " + e.getMessage());
-				Log.e(TAG, "Retrying");
-				// retry
-				database = dbHelper.openDatabase();
-				stolpersteinBos = getStolpersteineInternal(database);
-			}
+			ArrayList<StolpersteinBo> stolpersteinBos = getStolpersteineInternal(database);
 			Log.d(TAG, "Returning Stolpersteine");
 			return stolpersteinBos;
 		} finally {
