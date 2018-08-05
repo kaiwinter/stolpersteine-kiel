@@ -3,10 +3,14 @@ package de.vrlfr.stolpersteine.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 public final class StolpersteineDao {
+
+	private static final String TAG = StolpersteineDao.class.getSimpleName();
 
 	private static final String[] STOLPERSTEINE_COLUMNS = { StolpersteinBo.ADRESSE_COLUMN, StolpersteinBo.VERLEGEDATUM,
 			StolpersteinBo.NAME_COLUMN, StolpersteinBo.GEBOREN_COLUMN, StolpersteinBo.TOD_COLUMN,
@@ -18,9 +22,20 @@ public final class StolpersteineDao {
 		SQLiteDatabase database = null;
 		try {
 			dbHelper = SQLiteHelper.getInstance(context);
-			database = dbHelper.openDatabase(-1);
+			database = dbHelper.openDatabase();
 
-			return getStolpersteineInternal(database);
+			ArrayList<StolpersteinBo> stolpersteinBos;
+			try {
+				stolpersteinBos = getStolpersteineInternal(database);
+			} catch (SQLiteException e) {
+				Log.e(TAG, "Caught SQLiteExeption: " + e.getMessage());
+				Log.e(TAG, "Retrying");
+				// retry
+				database = dbHelper.openDatabase();
+				stolpersteinBos = getStolpersteineInternal(database);
+			}
+			Log.d(TAG, "Returning Stolpersteine");
+			return stolpersteinBos;
 		} finally {
 			if (dbHelper != null) {
 				dbHelper.close();
