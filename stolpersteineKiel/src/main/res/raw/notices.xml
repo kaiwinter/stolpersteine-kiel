@@ -47,6 +47,12 @@
         <license>Creative Commons Attribution-NoDerivs 3.0 Unported</license>
     </notice>
     <notice>
+        <name>Android PdfViewer</name>
+        <url>https://github.com/barteksc/AndroidPdfViewer</url>
+        <copyright>Bartosz Schiller</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
         <name>Google Maps</name>
         <url>https://www.google.com</url>
         <license>Google Maps Android API v2</license>
