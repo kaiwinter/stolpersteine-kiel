@@ -16,7 +16,7 @@ public final class SQLiteHelper extends SQLiteOpenHelper {
 
     private static final String TAG = SQLiteHelper.class.getSimpleName();
     private static final String DB_NAME = "steine.db";
-    private static final int DB_VERSION = 19;
+    private static final int DB_VERSION = 20;
     private static SQLiteHelper instance;
     private final Context context;
 
