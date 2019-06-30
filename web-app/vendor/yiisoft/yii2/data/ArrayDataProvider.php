@@ -27,7 +27,7 @@ use yii\helpers\ArrayHelper;
  *
  * ArrayDataProvider may be used in the following way:
  *
- * ~~~
+ * ```php
  * $query = new Query;
  * $provider = new ArrayDataProvider([
  *     'allModels' => $query->from('post')->all(),
@@ -40,10 +40,12 @@ use yii\helpers\ArrayHelper;
  * ]);
  * // get the posts in the current page
  * $posts = $provider->getModels();
- * ~~~
+ * ```
  *
  * Note: if you want to use the sorting feature, you must configure the [[sort]] property
  * so that the provider knows which columns can be sorted.
+ *
+ * For more details and usage information on ArrayDataProvider, see the [guide article on data providers](guide:output-data-providers).
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -63,10 +65,16 @@ class ArrayDataProvider extends BaseDataProvider
      * The array elements must use zero-based integer keys.
      */
     public $allModels;
+    /**
+     * @var string the name of the [[\yii\base\Model|Model]] class that will be represented.
+     * This property is used to get columns' names.
+     * @since 2.0.9
+     */
+    public $modelClass;
 
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function prepareModels()
     {
@@ -80,14 +88,17 @@ class ArrayDataProvider extends BaseDataProvider
 
         if (($pagination = $this->getPagination()) !== false) {
             $pagination->totalCount = $this->getTotalCount();
-            $models = array_slice($models, $pagination->getOffset(), $pagination->getLimit());
+
+            if ($pagination->getPageSize() > 0) {
+                $models = array_slice($models, $pagination->getOffset(), $pagination->getLimit(), true);
+            }
         }
 
         return $models;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function prepareKeys($models)
     {
@@ -102,21 +113,21 @@ class ArrayDataProvider extends BaseDataProvider
             }
 
             return $keys;
-        } else {
-            return array_keys($models);
         }
+
+        return array_keys($models);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function prepareTotalCount()
     {
-        return count($this->allModels);
+        return is_array($this->allModels) ? count($this->allModels) : 0;
     }
 
     /**
-     * Sorts the data models according to the given sort definition
+     * Sorts the data models according to the given sort definition.
      * @param array $models the models to be sorted
      * @param Sort $sort the sort definition
      * @return array the sorted data models

@@ -20,7 +20,7 @@ use Yii;
 class StringValidator extends Validator
 {
     /**
-     * @var integer|array specifies the length limit of the value to be validated.
+     * @var int|array specifies the length limit of the value to be validated.
      * This can be specified in one of the following forms:
      *
      * - an integer: the exact length that the value should be of;
@@ -28,18 +28,23 @@ class StringValidator extends Validator
      *   This will overwrite [[min]].
      * - an array of two elements: the minimum and maximum lengths that the value should be of.
      *   For example, `[8, 128]`. This will overwrite both [[min]] and [[max]].
+     * @see tooShort for the customized message for a too short string.
+     * @see tooLong for the customized message for a too long string.
+     * @see notEqual for the customized message for a string that does not match desired length.
      */
     public $length;
     /**
-     * @var integer maximum length. If not set, it means no maximum length limit.
+     * @var int maximum length. If not set, it means no maximum length limit.
+     * @see tooLong for the customized message for a too long string.
      */
     public $max;
     /**
-     * @var integer minimum length. If not set, it means no minimum length limit.
+     * @var int minimum length. If not set, it means no minimum length limit.
+     * @see tooShort for the customized message for a too short string.
      */
     public $min;
     /**
-     * @var string user-defined error message used when the value is not a string
+     * @var string user-defined error message used when the value is not a string.
      */
     public $message;
     /**
@@ -62,7 +67,7 @@ class StringValidator extends Validator
 
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -77,7 +82,7 @@ class StringValidator extends Validator
             $this->length = null;
         }
         if ($this->encoding === null) {
-            $this->encoding = Yii::$app->charset;
+            $this->encoding = Yii::$app ? Yii::$app->charset : 'UTF-8';
         }
         if ($this->message === null) {
             $this->message = Yii::t('yii', '{attribute} must be a string.');
@@ -94,14 +99,14 @@ class StringValidator extends Validator
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function validateAttribute($object, $attribute)
+    public function validateAttribute($model, $attribute)
     {
-        $value = $object->$attribute;
+        $value = $model->$attribute;
 
         if (!is_string($value)) {
-            $this->addError($object, $attribute, $this->message);
+            $this->addError($model, $attribute, $this->message);
 
             return;
         }
@@ -109,18 +114,18 @@ class StringValidator extends Validator
         $length = mb_strlen($value, $this->encoding);
 
         if ($this->min !== null && $length < $this->min) {
-            $this->addError($object, $attribute, $this->tooShort, ['min' => $this->min]);
+            $this->addError($model, $attribute, $this->tooShort, ['min' => $this->min]);
         }
         if ($this->max !== null && $length > $this->max) {
-            $this->addError($object, $attribute, $this->tooLong, ['max' => $this->max]);
+            $this->addError($model, $attribute, $this->tooLong, ['max' => $this->max]);
         }
         if ($this->length !== null && $length !== $this->length) {
-            $this->addError($object, $attribute, $this->notEqual, ['length' => $this->length]);
+            $this->addError($model, $attribute, $this->notEqual, ['length' => $this->length]);
         }
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function validateValue($value)
     {
@@ -144,45 +149,54 @@ class StringValidator extends Validator
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function clientValidateAttribute($object, $attribute, $view)
+    public function clientValidateAttribute($model, $attribute, $view)
     {
-        $label = $object->getAttributeLabel($attribute);
+        ValidationAsset::register($view);
+        $options = $this->getClientOptions($model, $attribute);
+
+        return 'yii.validation.string(value, messages, ' . json_encode($options, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ');';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClientOptions($model, $attribute)
+    {
+        $label = $model->getAttributeLabel($attribute);
 
         $options = [
-            'message' => Yii::$app->getI18n()->format($this->message, [
+            'message' => $this->formatMessage($this->message, [
                 'attribute' => $label,
-            ], Yii::$app->language),
+            ]),
         ];
 
         if ($this->min !== null) {
             $options['min'] = $this->min;
-            $options['tooShort'] = Yii::$app->getI18n()->format($this->tooShort, [
+            $options['tooShort'] = $this->formatMessage($this->tooShort, [
                 'attribute' => $label,
                 'min' => $this->min,
-            ], Yii::$app->language);
+            ]);
         }
         if ($this->max !== null) {
             $options['max'] = $this->max;
-            $options['tooLong'] = Yii::$app->getI18n()->format($this->tooLong, [
+            $options['tooLong'] = $this->formatMessage($this->tooLong, [
                 'attribute' => $label,
                 'max' => $this->max,
-            ], Yii::$app->language);
+            ]);
         }
         if ($this->length !== null) {
             $options['is'] = $this->length;
-            $options['notEqual'] = Yii::$app->getI18n()->format($this->notEqual, [
+            $options['notEqual'] = $this->formatMessage($this->notEqual, [
                 'attribute' => $label,
                 'length' => $this->length,
-            ], Yii::$app->language);
+            ]);
         }
         if ($this->skipOnEmpty) {
             $options['skipOnEmpty'] = 1;
         }
 
-        ValidationAsset::register($view);
-
-        return 'yii.validation.string(value, messages, ' . json_encode($options) . ');';
+        return $options;
     }
 }

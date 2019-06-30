@@ -15,7 +15,7 @@ namespace yii\mail;
  *
  * Messages are sent by a [[\yii\mail\MailerInterface|mailer]], like the following,
  *
- * ~~~
+ * ```php
  * Yii::$app->mailer->compose()
  *     ->setFrom('from@domain.com')
  *     ->setTo($form->email)
@@ -23,7 +23,7 @@ namespace yii\mail;
  *     ->setTextBody('Plain text content')
  *     ->setHtmlBody('<b>HTML content</b>')
  *     ->send();
- * ~~~
+ * ```
  *
  * @see MailerInterface
  *
@@ -41,13 +41,13 @@ interface MessageInterface
     /**
      * Sets the character set of this message.
      * @param string $charset character set name.
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function setCharset($charset);
 
     /**
      * Returns the message sender.
-     * @return string the sender
+     * @return string|array the sender
      */
     public function getFrom();
 
@@ -57,13 +57,13 @@ interface MessageInterface
      * You may pass an array of addresses if this message is from multiple people.
      * You may also specify sender name in addition to email address using format:
      * `[email => name]`.
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function setFrom($from);
 
     /**
      * Returns the message recipient(s).
-     * @return array the message recipients
+     * @return string|array the message recipients
      */
     public function getTo();
 
@@ -73,13 +73,13 @@ interface MessageInterface
      * You may pass an array of addresses if multiple recipients should receive this message.
      * You may also specify receiver name in addition to email address using format:
      * `[email => name]`.
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function setTo($to);
 
     /**
      * Returns the reply-to address of this message.
-     * @return string the reply-to address of this message.
+     * @return string|array the reply-to address of this message.
      */
     public function getReplyTo();
 
@@ -89,13 +89,13 @@ interface MessageInterface
      * You may pass an array of addresses if this message should be replied to multiple people.
      * You may also specify reply-to name in addition to email address using format:
      * `[email => name]`.
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function setReplyTo($replyTo);
 
     /**
      * Returns the Cc (additional copy receiver) addresses of this message.
-     * @return array the Cc (additional copy receiver) addresses of this message.
+     * @return string|array the Cc (additional copy receiver) addresses of this message.
      */
     public function getCc();
 
@@ -105,13 +105,13 @@ interface MessageInterface
      * You may pass an array of addresses if multiple recipients should receive this message.
      * You may also specify receiver name in addition to email address using format:
      * `[email => name]`.
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function setCc($cc);
 
     /**
      * Returns the Bcc (hidden copy receiver) addresses of this message.
-     * @return array the Bcc (hidden copy receiver) addresses of this message.
+     * @return string|array the Bcc (hidden copy receiver) addresses of this message.
      */
     public function getBcc();
 
@@ -121,7 +121,7 @@ interface MessageInterface
      * You may pass an array of addresses if multiple recipients should receive this message.
      * You may also specify receiver name in addition to email address using format:
      * `[email => name]`.
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function setBcc($bcc);
 
@@ -134,21 +134,21 @@ interface MessageInterface
     /**
      * Sets the message subject.
      * @param string $subject message subject
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function setSubject($subject);
 
     /**
      * Sets message plain text content.
      * @param string $text message plain text content.
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function setTextBody($text);
 
     /**
      * Sets message HTML content.
      * @param string $html message HTML content.
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function setHtmlBody($html);
 
@@ -160,7 +160,7 @@ interface MessageInterface
      * - fileName: name, which should be used to attach file.
      * - contentType: attached file MIME type.
      *
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function attach($fileName, array $options = []);
 
@@ -172,7 +172,7 @@ interface MessageInterface
      * - fileName: name, which should be used to attach file.
      * - contentType: attached file MIME type.
      *
-     * @return static self reference.
+     * @return $this self reference.
      */
     public function attachContent($content, array $options = []);
 
@@ -205,8 +205,8 @@ interface MessageInterface
     /**
      * Sends this email message.
      * @param MailerInterface $mailer the mailer that should be used to send this message.
-     * If null, the "mail" application component will be used instead.
-     * @return boolean whether this message is sent successfully.
+     * If null, the "mailer" application component will be used instead.
+     * @return bool whether this message is sent successfully.
      */
     public function send(MailerInterface $mailer = null);
 

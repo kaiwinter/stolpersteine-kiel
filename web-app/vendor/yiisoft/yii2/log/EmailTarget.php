@@ -24,7 +24,7 @@ use yii\mail\MailerInterface;
  *          'targets' => [
  *              [
  *                  'class' => 'yii\log\EmailTarget',
- *                  'mailer' =>'mailer',
+ *                  'mailer' => 'mailer',
  *                  'levels' => ['error', 'warning'],
  *                  'message' => [
  *                      'from' => ['log@example.com'],
@@ -50,15 +50,16 @@ class EmailTarget extends Target
      */
     public $message = [];
     /**
-     * @var MailerInterface|string the mailer object or the application component ID of the mailer object.
+     * @var MailerInterface|array|string the mailer object or the application component ID of the mailer object.
      * After the EmailTarget object is created, if you want to change this property, you should only assign it
      * with a mailer object.
+     * Starting from version 2.0.2, this can also be a configuration array for creating the object.
      */
     public $mailer = 'mailer';
 
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -71,6 +72,8 @@ class EmailTarget extends Target
 
     /**
      * Sends log messages to specified email addresses.
+     * Starting from version 2.0.14, this method throws LogRuntimeException in case the log can not be exported.
+     * @throws LogRuntimeException
      */
     public function export()
     {
@@ -81,7 +84,10 @@ class EmailTarget extends Target
         }
         $messages = array_map([$this, 'formatMessage'], $this->messages);
         $body = wordwrap(implode("\n", $messages), 70);
-        $this->composeMessage($body)->send($this->mailer);
+        $message = $this->composeMessage($body);
+        if (!$message->send($this->mailer)) {
+            throw new LogRuntimeException('Unable to export log through email!');
+        }
     }
 
     /**

@@ -15,6 +15,8 @@ use yii\web\ServerErrorHttpException;
 /**
  * UpdateAction implements the API endpoint for updating a model.
  *
+ * For more details and usage information on UpdateAction, see the [guide article on rest controllers](guide:rest-controllers).
+ *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
@@ -30,7 +32,7 @@ class UpdateAction extends Action
      * Updates an existing model.
      * @param string $id the primary key of the model.
      * @return \yii\db\ActiveRecordInterface the model being updated
-     * @throws \Exception if there is any error when updating the model
+     * @throws ServerErrorHttpException if there is any error when updating the model
      */
     public function run($id)
     {

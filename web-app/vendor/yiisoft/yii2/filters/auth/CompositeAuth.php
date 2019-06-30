@@ -50,7 +50,7 @@ class CompositeAuth extends AuthMethod
 
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function beforeAction($action)
     {
@@ -58,14 +58,16 @@ class CompositeAuth extends AuthMethod
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function authenticate($user, $request, $response)
     {
         foreach ($this->authMethods as $i => $auth) {
-            $this->authMethods[$i] = $auth = Yii::createObject($auth);
             if (!$auth instanceof AuthInterface) {
-                throw new InvalidConfigException(get_class($auth) . ' must implement yii\filters\auth\AuthInterface');
+                $this->authMethods[$i] = $auth = Yii::createObject($auth);
+                if (!$auth instanceof AuthInterface) {
+                    throw new InvalidConfigException(get_class($auth) . ' must implement yii\filters\auth\AuthInterface');
+                }
             }
 
             $identity = $auth->authenticate($user, $request, $response);
@@ -78,12 +80,12 @@ class CompositeAuth extends AuthMethod
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function challenge($response)
     {
         foreach ($this->authMethods as $method) {
-            /** @var $method AuthInterface */
+            /* @var $method AuthInterface */
             $method->challenge($response);
         }
     }

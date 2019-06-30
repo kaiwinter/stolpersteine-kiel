@@ -34,7 +34,7 @@ interface QueryInterface
      * Executes the query and returns a single row of result.
      * @param Connection $db the database connection used to execute the query.
      * If this parameter is not given, the `db` application component will be used.
-     * @return array|boolean the first row (in terms of an array) of the query result. False is returned if the query
+     * @return array|bool the first row (in terms of an array) of the query result. False is returned if the query
      * results in nothing.
      */
     public function one($db = null);
@@ -44,7 +44,7 @@ interface QueryInterface
      * @param string $q the COUNT expression. Defaults to '*'.
      * @param Connection $db the database connection used to execute the query.
      * If this parameter is not given, the `db` application component will be used.
-     * @return integer number of records
+     * @return int number of records.
      */
     public function count($q = '*', $db = null);
 
@@ -52,7 +52,7 @@ interface QueryInterface
      * Returns a value indicating whether the query result contains any row of data.
      * @param Connection $db the database connection used to execute the query.
      * If this parameter is not given, the `db` application component will be used.
-     * @return boolean whether the query result contains any row of data.
+     * @return bool whether the query result contains any row of data.
      */
     public function exists($db = null);
 
@@ -62,14 +62,14 @@ interface QueryInterface
      * This can also be a callable (e.g. anonymous function) that returns the index value based on the given
      * row data. The signature of the callable should be:
      *
-     * ~~~
+     * ```php
      * function ($row)
      * {
      *     // return the index value corresponding to $row
      * }
-     * ~~~
+     * ```
      *
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function indexBy($column);
 
@@ -88,10 +88,10 @@ interface QueryInterface
      *
      * - `['type' => 1, 'status' => 2]` generates `(type = 1) AND (status = 2)`.
      * - `['id' => [1, 2, 3], 'status' => 2]` generates `(id IN (1, 2, 3)) AND (status = 2)`.
-     * - `['status' => null] generates `status IS NULL`.
+     * - `['status' => null]` generates `status IS NULL`.
      *
      * A condition in operator format generates the SQL expression according to the specified operator, which
-     * can be one of the followings:
+     * can be one of the following:
      *
      * - **and**: the operands should be concatenated together using `AND`. For example,
      *   `['and', 'id=1', 'id=2']` will generate `id=1 AND id=2`. If an operand is an array,
@@ -99,9 +99,10 @@ interface QueryInterface
      *   `['and', 'type=1', ['or', 'id=1', 'id=2']]` will generate `type=1 AND (id=1 OR id=2)`.
      *   The method will *not* do any quoting or escaping.
      *
-     * - **or**: similar to the `and` operator except that the operands are concatenated using `OR`.
+     * - **or**: similar to the `and` operator except that the operands are concatenated using `OR`. For example,
+     *   `['or', ['type' => [7, 8, 9]], ['id' => [1, 2, 3]]]` will generate `(type IN (7, 8, 9) OR (id IN (1, 2, 3)))`.
      *
-     * - **not**: this will take only one operator and build the negation of it by prefixing the query string with `NOT`.
+     * - **not**: this will take only one operand and build the negation of it by prefixing the query string with `NOT`.
      *   For example `['not', ['attribute' => null]]` will result in the condition `NOT (attribute IS NULL)`.
      *
      * - **between**: operand 1 should be the column name, and operand 2 and 3 should be the
@@ -115,6 +116,12 @@ interface QueryInterface
      *   the range of the values that the column or DB expression should be in. For example,
      *   `['in', 'id', [1, 2, 3]]` will generate `id IN (1, 2, 3)`.
      *   The method will properly quote the column name and escape values in the range.
+     *
+     *   To create a composite `IN` condition you can use and array for the column name and value, where the values are indexed by the column name:
+     *   `['in', ['id', 'name'], [['id' => 1, 'name' => 'foo'], ['id' => 2, 'name' => 'bar']] ]`.
+     *
+     *   You may also specify a sub-query that is used to get the values for the `IN`-condition:
+     *   `['in', 'user_id', (new Query())->select('id')->from('users')->where(['active' => 1])]`
      *
      * - **not in**: similar to the `in` operator except that `IN` is replaced with `NOT IN` in the generated condition.
      *
@@ -137,11 +144,19 @@ interface QueryInterface
      * - **or not like**: similar to the `not like` operator except that `OR` is used to concatenate
      *   the `NOT LIKE` predicates.
      *
+     * - **exists**: operand 1 is a query object that used to build an `EXISTS` condition. For example
+     *   `['exists', (new Query())->select('id')->from('users')->where(['active' => 1])]` will result in the following SQL expression:
+     *   `EXISTS (SELECT "id" FROM "users" WHERE "active"=1)`.
+     *
+     * - **not exists**: similar to the `exists` operator except that `EXISTS` is replaced with `NOT EXISTS` in the generated condition.
+     *
      * - Additionally you can specify arbitrary operators as follows: A condition of `['>=', 'id', 10]` will result in the
      *   following SQL expression: `id >= 10`.
      *
-     * @param string|array $condition the conditions that should be put in the WHERE part.
-     * @return static the query object itself
+     * **Note that this method will override any existing WHERE condition. You might want to use [[andWhere()]] or [[orWhere()]] instead.**
+     *
+     * @param array $condition the conditions that should be put in the WHERE part.
+     * @return $this the query object itself
      * @see andWhere()
      * @see orWhere()
      */
@@ -150,9 +165,9 @@ interface QueryInterface
     /**
      * Adds an additional WHERE condition to the existing one.
      * The new condition and the existing one will be joined using the 'AND' operator.
-     * @param string|array $condition the new WHERE condition. Please refer to [[where()]]
+     * @param array $condition the new WHERE condition. Please refer to [[where()]]
      * on how to specify this parameter.
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see where()
      * @see orWhere()
      */
@@ -161,9 +176,9 @@ interface QueryInterface
     /**
      * Adds an additional WHERE condition to the existing one.
      * The new condition and the existing one will be joined using the 'OR' operator.
-     * @param string|array $condition the new WHERE condition. Please refer to [[where()]]
+     * @param array $condition the new WHERE condition. Please refer to [[where()]]
      * on how to specify this parameter.
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see where()
      * @see andWhere()
      */
@@ -174,7 +189,7 @@ interface QueryInterface
      *
      * @param array $condition the conditions that should be put in the WHERE part. Please refer to [[where()]]
      * on how to specify this parameter.
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see andFilterWhere()
      * @see orFilterWhere()
      */
@@ -185,7 +200,7 @@ interface QueryInterface
      * The new condition and the existing one will be joined using the 'AND' operator.
      * @param array $condition the new WHERE condition. Please refer to [[where()]]
      * on how to specify this parameter.
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see filterWhere()
      * @see orFilterWhere()
      */
@@ -196,7 +211,7 @@ interface QueryInterface
      * The new condition and the existing one will be joined using the 'OR' operator.
      * @param array $condition the new WHERE condition. Please refer to [[where()]]
      * on how to specify this parameter.
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see filterWhere()
      * @see andFilterWhere()
      */
@@ -209,7 +224,7 @@ interface QueryInterface
      * (e.g. `['id' => SORT_ASC, 'name' => SORT_DESC]`).
      * The method will automatically quote the column names unless a column contains some parenthesis
      * (which means the column contains a DB expression).
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see addOrderBy()
      */
     public function orderBy($columns);
@@ -221,22 +236,34 @@ interface QueryInterface
      * (e.g. `['id' => SORT_ASC, 'name' => SORT_DESC]`).
      * The method will automatically quote the column names unless a column contains some parenthesis
      * (which means the column contains a DB expression).
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see orderBy()
      */
     public function addOrderBy($columns);
 
     /**
      * Sets the LIMIT part of the query.
-     * @param integer $limit the limit. Use null or negative value to disable limit.
-     * @return static the query object itself
+     * @param int|null $limit the limit. Use null or negative value to disable limit.
+     * @return $this the query object itself
      */
     public function limit($limit);
 
     /**
      * Sets the OFFSET part of the query.
-     * @param integer $offset the offset. Use null or negative value to disable offset.
-     * @return static the query object itself
+     * @param int|null $offset the offset. Use null or negative value to disable offset.
+     * @return $this the query object itself
      */
     public function offset($offset);
+
+    /**
+     * Sets whether to emulate query execution, preventing any interaction with data storage.
+     * After this mode is enabled, methods, returning query results like [[one()]], [[all()]], [[exists()]]
+     * and so on, will return empty or false values.
+     * You should use this method in case your program logic indicates query should not return any results, like
+     * in case you set false where condition like `0=1`.
+     * @param bool $value whether to prevent query execution.
+     * @return $this the query object itself.
+     * @since 2.0.11
+     */
+    public function emulateExecution($value = true);
 }

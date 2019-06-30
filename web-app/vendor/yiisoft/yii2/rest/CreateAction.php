@@ -15,6 +15,8 @@ use yii\web\ServerErrorHttpException;
 /**
  * CreateAction implements the API endpoint for creating a new model from the given data.
  *
+ * For more details and usage information on CreateAction, see the [guide article on rest controllers](guide:rest-controllers).
+ *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
@@ -25,7 +27,7 @@ class CreateAction extends Action
      */
     public $scenario = Model::SCENARIO_DEFAULT;
     /**
-     * @var string the name of the view action. This property is need to create the URL when the model is successfully created.
+     * @var string the name of the view action. This property is needed to create the URL when the model is successfully created.
      */
     public $viewAction = 'view';
 
@@ -33,7 +35,7 @@ class CreateAction extends Action
     /**
      * Creates a new model.
      * @return \yii\db\ActiveRecordInterface the model newly created
-     * @throws \Exception if there is any error when creating the model
+     * @throws ServerErrorHttpException if there is any error when creating the model
      */
     public function run()
     {
