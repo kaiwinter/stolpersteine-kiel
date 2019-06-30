@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "de.vrlfr.stolpersteine"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
     }
 
     buildTypes {
@@ -23,9 +23,9 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.gms:play-services-maps:16.1.0'
-    implementation 'com.android.support:support-v4:28.0.0'
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
 
     implementation 'com.github.thebestpol:ParallaxScroll:12665d54d5'
     implementation 'com.squareup.picasso:picasso:2.5.2'
