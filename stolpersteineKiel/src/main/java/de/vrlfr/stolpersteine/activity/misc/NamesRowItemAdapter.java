@@ -21,15 +21,15 @@ import java.util.List;
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.FullscreenImageActivity;
 import de.vrlfr.stolpersteine.activity.FullscreenPDFActivity;
-import de.vrlfr.stolpersteine.database.StolpersteinBo;
+import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 
     private static final int ROW_ID = R.layout.stolperstein_listview_item;
 
-    private final List<Collection<StolpersteinBo>> stolpersteineList;
+    private final List<Collection<Stolperstein>> stolpersteineList;
 
-    public NamesRowItemAdapter(Activity context, Collection<Collection<StolpersteinBo>> stolpersteine) {
+    public NamesRowItemAdapter(Activity context, Collection<Collection<Stolperstein>> stolpersteine) {
         super(context, ROW_ID);
         this.stolpersteineList = new ArrayList<>(stolpersteine);
     }
@@ -54,9 +54,9 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
             viewHolder = (MotionRowViewHolder) convertView.getTag();
         }
 
-        Collection<StolpersteinBo> stolpersteine = stolpersteineList.get(position);
+        Collection<Stolperstein> stolpersteine = stolpersteineList.get(position);
         String alleNamenString = "";
-        for (StolpersteinBo stolperstein : stolpersteine) {
+        for (Stolperstein stolperstein : stolpersteine) {
 
             if (alleNamenString.length() > 0) {
                 alleNamenString += "<br/>";
@@ -65,9 +65,9 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         }
         viewHolder.textViewNamen.setText(Html.fromHtml(alleNamenString));
 
-        final StolpersteinBo stolpersteinBo = stolpersteine.iterator().next();
+        final Stolperstein stolperstein = stolpersteine.iterator().next();
         ImageView stolpersteinBildImageView = convertView.findViewById(R.id.stolpersteinBild);
-        String uri = "@drawable/id" + stolpersteinBo.imageId;
+        String uri = "@drawable/id" + stolperstein.imageId;
         final int imageResource = getContext().getResources().getIdentifier(uri, null, getContext().getPackageName());
 
         if (imageResource > 0) {
@@ -78,28 +78,28 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
                 @Override
                 public void onClick(View v) {
                     Intent intent = FullscreenImageActivity.newIntent(v.getContext(), imageResource,
-                            stolpersteinBo.adresse);
+                            stolperstein.adresse);
                     NamesRowItemAdapter.this.getContext().startActivity(intent);
                 }
             });
         }
 
         ImageView biografieImageViewPdf = convertView.findViewById(R.id.biografieBild);
-        if (stolpersteinBo.bioId == -1) {
+        if (stolperstein.bioId == -1) {
             biografieImageViewPdf.setVisibility(View.GONE);
         } else {
             biografieImageViewPdf.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    Intent intent = FullscreenPDFActivity.newIntent(v.getContext(), stolpersteinBo.bioId);
+                    Intent intent = FullscreenPDFActivity.newIntent(v.getContext(), stolperstein.bioId);
                     NamesRowItemAdapter.this.getContext().startActivity(intent);
                 }
             });
         }
 
         TextView verlegedatumCopyrightTf = convertView.findViewById(R.id.detail_verlegedatum_copyright);
-        verlegedatumCopyrightTf.setText(getContext().getString(R.string.image_verlegt_am) + stolpersteinBo.verlegedatum);
+        verlegedatumCopyrightTf.setText(getContext().getString(R.string.image_verlegt_am) + stolperstein.verlegedatum);
 
         return convertView;
     }

@@ -37,17 +37,17 @@ import java.util.Map;
 
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.StolpersteinActivity;
-import de.vrlfr.stolpersteine.database.StolpersteinBo;
+import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public class MapFragment extends Fragment {
     private static final int REQUEST_LOCATION_PERMISSIONS = 1;
     private static final String STOLPERSTEINE_EXTRA = "de.vrlfr.stolpersteine.StolpersteinList";
     private static final LatLng KIEL = new LatLng(54.323396, 10.120184);
-    private List<StolpersteinBo> stolpersteine;
+    private List<Stolperstein> stolpersteine;
     private View view;
     private GoogleMap map;
 
-    public static MapFragment newInstance(ArrayList<StolpersteinBo> stolpersteine) {
+    public static MapFragment newInstance(ArrayList<Stolperstein> stolpersteine) {
         MapFragment fragment = new MapFragment();
 
         Bundle arguments = new Bundle();
@@ -112,12 +112,12 @@ public class MapFragment extends Fragment {
     }
 
     private void initMarkers(GoogleMap map) {
-        Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine = sortStolpersteineByAdresse(stolpersteine);
+        Map<String, ArrayList<Stolperstein>> adresse2Stolpersteine = sortStolpersteineByAdresse(stolpersteine);
         addMapListeners(map, adresse2Stolpersteine);
         new AddMarkerToMapAsync(getActivity(), map).execute(adresse2Stolpersteine);
     }
 
-    private void addMapListeners(final GoogleMap map, final Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine) {
+    private void addMapListeners(final GoogleMap map, final Map<String, ArrayList<Stolperstein>> adresse2Stolpersteine) {
         final boolean[] firstTime = {true};
         map.setInfoWindowAdapter(new InfoWindowAdapter() {
             @Override
@@ -130,7 +130,7 @@ public class MapFragment extends Fragment {
                 TextView tvSnippet = myContentsView.findViewById(R.id.marker_snippet);
                 tvSnippet.setText(marker.getSnippet());
 
-                StolpersteinBo stolperstein = adresse2Stolpersteine.get(marker.getTitle()).iterator().next();
+                Stolperstein stolperstein = adresse2Stolpersteine.get(marker.getTitle()).iterator().next();
                 ImageView imageView = myContentsView.findViewById(R.id.marker_image);
                 if (stolperstein.imageId > -1) {
 
@@ -167,7 +167,7 @@ public class MapFragment extends Fragment {
             @Override
             public void onInfoWindowClick(Marker marker) {
                 LatLng latLng = marker.getPosition();
-                ArrayList<StolpersteinBo> arrayList = adresse2Stolpersteine.get(marker.getTitle());
+                ArrayList<Stolperstein> arrayList = adresse2Stolpersteine.get(marker.getTitle());
                 Intent intent = StolpersteinActivity.newIntent(getActivity(), arrayList, latLng);
                 startActivity(intent);
             }
@@ -206,12 +206,12 @@ public class MapFragment extends Fragment {
     /**
      * Gibt eine Liste zurück Adresse -> Liste<Stolperstein>.
      */
-    private Map<String, ArrayList<StolpersteinBo>> sortStolpersteineByAdresse(Collection<StolpersteinBo> stolpersteine) {
+    private Map<String, ArrayList<Stolperstein>> sortStolpersteineByAdresse(Collection<Stolperstein> stolpersteine) {
 
-        Map<String, ArrayList<StolpersteinBo>> adresse2Stolpersteine = new HashMap<>();
-        for (StolpersteinBo stolperstein : stolpersteine) {
+        Map<String, ArrayList<Stolperstein>> adresse2Stolpersteine = new HashMap<>();
+        for (Stolperstein stolperstein : stolpersteine) {
             String adresse = stolperstein.adresse;
-            ArrayList<StolpersteinBo> stolpersteineAnAdresse = adresse2Stolpersteine.get(adresse);
+            ArrayList<Stolperstein> stolpersteineAnAdresse = adresse2Stolpersteine.get(adresse);
             if (stolpersteineAnAdresse == null) {
                 stolpersteineAnAdresse = new ArrayList<>();
                 adresse2Stolpersteine.put(adresse, stolpersteineAnAdresse);

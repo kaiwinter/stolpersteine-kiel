@@ -27,14 +27,14 @@ import java.util.Map;
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.misc.ImageBioId;
 import de.vrlfr.stolpersteine.activity.misc.NamesRowItemAdapter;
-import de.vrlfr.stolpersteine.database.StolpersteinBo;
+import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public class StolpersteinActivity extends BaseActivity {
 
     private static final String STOLPERSTEINE_EXTRA = "stolpersteine";
     private static final String STOLPERSTEINE_LATLNG_EXTRA = "stolperstein_latlng";
 
-    public static Intent newIntent(Context context, ArrayList<StolpersteinBo> arrayList, LatLng latLng) {
+    public static Intent newIntent(Context context, ArrayList<Stolperstein> arrayList, LatLng latLng) {
         Intent intent = new Intent(context, StolpersteinActivity.class);
 
         // extras
@@ -57,27 +57,27 @@ public class StolpersteinActivity extends BaseActivity {
     }
 
     private void handleExtras(final Bundle extras) {
-        List<StolpersteinBo> parcelableArrayList = extras.getParcelableArrayList(STOLPERSTEINE_EXTRA);
-        Map<ImageBioId, Collection<StolpersteinBo>> imageBio2Stolperstein = new HashMap<>();
+        List<Stolperstein> parcelableArrayList = extras.getParcelableArrayList(STOLPERSTEINE_EXTRA);
+        Map<ImageBioId, Collection<Stolperstein>> imageBio2Stolperstein = new HashMap<>();
         final boolean[] hasBiografie = {false};
-        for (StolpersteinBo stolpersteinBo : parcelableArrayList) {
-            int imageId = stolpersteinBo.imageId;
-            int bioId = stolpersteinBo.bioId;
+        for (Stolperstein stolperstein : parcelableArrayList) {
+            int imageId = stolperstein.imageId;
+            int bioId = stolperstein.bioId;
             ImageBioId imageBioId = new ImageBioId(imageId, bioId);
 
-            Collection<StolpersteinBo> stolpersteine = imageBio2Stolperstein.get(imageBioId);
+            Collection<Stolperstein> stolpersteine = imageBio2Stolperstein.get(imageBioId);
             if (stolpersteine == null) {
                 stolpersteine = new ArrayList<>();
                 imageBio2Stolperstein.put(imageBioId, stolpersteine);
             }
-            stolpersteine.add(stolpersteinBo);
+            stolpersteine.add(stolperstein);
 
-            if (stolpersteinBo.bioId > -1) {
+            if (stolperstein.bioId > -1) {
                 hasBiografie[0] = true;
             }
         }
 
-        StolpersteinBo stolperstein = parcelableArrayList.iterator().next();
+        Stolperstein stolperstein = parcelableArrayList.iterator().next();
         final String adresse = stolperstein.adresse;
         getSupportActionBar().setTitle(adresse);
 

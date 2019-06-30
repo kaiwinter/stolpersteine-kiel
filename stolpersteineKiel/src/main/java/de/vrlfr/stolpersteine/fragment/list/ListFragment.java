@@ -22,15 +22,15 @@ import java.util.List;
 
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.StolpersteinActivity;
-import de.vrlfr.stolpersteine.database.StolpersteinBo;
+import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public class ListFragment extends Fragment implements OnQueryTextListener {
 
 	private static final String STOLPERSTEINE = "stolpersteine";
-	private List<StolpersteinBo> stolpersteine;
+	private List<Stolperstein> stolpersteine;
 	private StolpersteinListAdapter adapter;
 
-	public static ListFragment newInstance(ArrayList<StolpersteinBo> stolpersteine) {
+	public static ListFragment newInstance(ArrayList<Stolperstein> stolpersteine) {
 		ListFragment fragment = new ListFragment();
 
 		Bundle arguments = new Bundle();
@@ -64,11 +64,11 @@ public class ListFragment extends Fragment implements OnQueryTextListener {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				StolpersteinBo stolpersteinBo = adapter.getItem(position);
+				Stolperstein stolperstein = adapter.getItem(position);
 
-				LatLng latLng = new LatLng(stolpersteinBo.latitude, stolpersteinBo.longitude);
-				ArrayList<StolpersteinBo> arrayList = new ArrayList<>(Collections
-						.singletonList(stolpersteinBo));
+				LatLng latLng = new LatLng(stolperstein.latitude, stolperstein.longitude);
+				ArrayList<Stolperstein> arrayList = new ArrayList<>(Collections
+						.singletonList(stolperstein));
 				Intent intent = StolpersteinActivity.newIntent(getActivity(), arrayList, latLng);
 				startActivity(intent);
 			}

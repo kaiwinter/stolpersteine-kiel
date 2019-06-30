@@ -8,15 +8,15 @@ import android.widget.Filterable;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.vrlfr.stolpersteine.database.StolpersteinBo;
+import de.vrlfr.stolpersteine.database.Stolperstein;
 
-public class StolpersteinListAdapter extends ArrayAdapter<StolpersteinBo> implements Filterable {
+public class StolpersteinListAdapter extends ArrayAdapter<Stolperstein> implements Filterable {
 
-	private final List<StolpersteinBo> stolpersteineFilterList;
+	private final List<Stolperstein> stolpersteineFilterList;
 
 	private ValueFilter valueFilter;
 
-	public StolpersteinListAdapter(Context context, List<StolpersteinBo> stolpersteine) {
+	public StolpersteinListAdapter(Context context, List<Stolperstein> stolpersteine) {
 		super(context, android.R.layout.simple_list_item_1);
 		addAll(stolpersteine);
 		this.stolpersteineFilterList = stolpersteine;
@@ -36,8 +36,8 @@ public class StolpersteinListAdapter extends ArrayAdapter<StolpersteinBo> implem
 			FilterResults results = new FilterResults();
 
 			if (constraint != null && constraint.length() > 0) {
-				ArrayList<StolpersteinBo> filterList = new ArrayList<>();
-				for (StolpersteinBo stolperstein : stolpersteineFilterList) {
+				ArrayList<Stolperstein> filterList = new ArrayList<>();
+				for (Stolperstein stolperstein : stolpersteineFilterList) {
 					if (stolperstein.name.toLowerCase().contains(constraint.toString().toLowerCase())) {
 						filterList.add(stolperstein);
 					}
@@ -55,7 +55,7 @@ public class StolpersteinListAdapter extends ArrayAdapter<StolpersteinBo> implem
 		@Override
 		protected void publishResults(CharSequence constraint, FilterResults results) {
 			clear();
-			ArrayList<StolpersteinBo> stolpersteine = (ArrayList<StolpersteinBo>) results.values;
+			ArrayList<Stolperstein> stolpersteine = (ArrayList<Stolperstein>) results.values;
 			addAll(stolpersteine);
 			if (results.count > 0) {
 				notifyDataSetChanged();

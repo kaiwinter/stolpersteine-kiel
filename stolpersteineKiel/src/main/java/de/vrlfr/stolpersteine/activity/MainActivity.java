@@ -21,10 +21,11 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import de.vrlfr.stolpersteine.R;
-import de.vrlfr.stolpersteine.database.StolpersteinBo;
-import de.vrlfr.stolpersteine.database.StolpersteineDao;
+import de.vrlfr.stolpersteine.database.Stolperstein;
 import de.vrlfr.stolpersteine.fragment.about.AboutFragment;
 import de.vrlfr.stolpersteine.fragment.list.ListFragment;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainActivity extends BaseActivity {
 
@@ -35,15 +36,19 @@ public class MainActivity extends BaseActivity {
 	private ActionBarDrawerToggle drawerToggle;
 	private Fragment mapFragment;
 	private ListFragment listFragment;
-	private ArrayList<StolpersteinBo> stolpersteine;
+	private ArrayList<Stolperstein> stolpersteine;
 	private BaseAdapter drawerListAdapter;
 
 	private final AtomicInteger currentlySelectedFragment = new AtomicInteger(-1);
+
+	private Realm realm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		realm = Realm.getDefaultInstance();
 
 		drawerList = findViewById(R.id.navList);
 		drawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -56,7 +61,8 @@ public class MainActivity extends BaseActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
 
-		stolpersteine = StolpersteineDao.getStolpersteine(this);
+		RealmResults<Stolperstein> all = realm.where(Stolperstein.class).findAll();
+		stolpersteine = new ArrayList<>(realm.copyFromRealm(all));
 
 		if (savedInstanceState == null) {
 			// Selektion initial programmatisch setzen
@@ -170,6 +176,19 @@ public class MainActivity extends BaseActivity {
 			selectItem(0);
 		} else {
 			super.onBackPressed();
+		}
+	}
+
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (realm != null) {
+			try {
+				realm.close();
+			} catch (IllegalStateException e) {
+				// ignore
+			}
 		}
 	}
 }

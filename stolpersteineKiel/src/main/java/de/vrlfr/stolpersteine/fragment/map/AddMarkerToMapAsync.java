@@ -14,10 +14,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import de.vrlfr.stolpersteine.R;
-import de.vrlfr.stolpersteine.database.StolpersteinBo;
+import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public class AddMarkerToMapAsync extends
-		AsyncTask<Map<String, ArrayList<StolpersteinBo>>, ArrayList<StolpersteinBo>, Boolean> {
+		AsyncTask<Map<String, ArrayList<Stolperstein>>, ArrayList<Stolperstein>, Boolean> {
 	private final WeakReference<Activity> context;
 	private final GoogleMap map;
 
@@ -27,20 +27,20 @@ public class AddMarkerToMapAsync extends
 	}
 
 	@Override
-	protected Boolean doInBackground(Map<String, ArrayList<StolpersteinBo>>... adresse2Stolpersteine) {
+	protected Boolean doInBackground(Map<String, ArrayList<Stolperstein>>... adresse2Stolpersteine) {
 		// Fügt alle Stolpersteine zur GoogleMap hinzu.
-		for (Entry<String, ArrayList<StolpersteinBo>> adresse2Stolperstein : adresse2Stolpersteine[0].entrySet()) {
+		for (Entry<String, ArrayList<Stolperstein>> adresse2Stolperstein : adresse2Stolpersteine[0].entrySet()) {
 			publishProgress(adresse2Stolperstein.getValue());
 		}
 		return true;
 	}
 
 	@Override
-	protected void onProgressUpdate(ArrayList<StolpersteinBo>... stolpersteine) {
+	protected void onProgressUpdate(ArrayList<Stolperstein>... stolpersteine) {
 		String namen = "";
 		String adresse = null;
 		LatLng latLon = null;
-		for (StolpersteinBo stolperstein : stolpersteine[0]) {
+		for (Stolperstein stolperstein : stolpersteine[0]) {
 			if (adresse == null) {
 				adresse = stolperstein.adresse;
 				latLon = new LatLng(stolperstein.latitude, stolperstein.longitude);
