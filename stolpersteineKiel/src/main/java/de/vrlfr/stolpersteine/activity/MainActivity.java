@@ -134,7 +134,7 @@ public class MainActivity extends BaseActivity {
 			}
 		};
 		drawerToggle.setDrawerIndicatorEnabled(true);
-		drawerLayout.setDrawerListener(drawerToggle);
+		drawerLayout.addDrawerListener(drawerToggle);
 	}
 
 	@Override
