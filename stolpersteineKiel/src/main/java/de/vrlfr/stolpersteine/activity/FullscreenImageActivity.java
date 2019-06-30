@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.ortiz.touch.TouchImageView;
+import com.ortiz.touchview.TouchImageView;
 import com.squareup.picasso.Picasso;
 
 import de.vrlfr.stolpersteine.R;
