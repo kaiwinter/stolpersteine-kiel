@@ -1,5 +1,10 @@
 # Built application files
-build/
+build/*
+stolpersteineKiel/build/*
+!stolpersteineKiel/build/outputs
+
+stolpersteineKiel/build/outputs/*
+!stolpersteineKiel/build/outputs/mapping
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -10,9 +15,6 @@ local.properties
 # User-specific configurations
 .idea/libraries/
 .idea/workspace.xml
-.idea/.name
-.idea/compiler.xml
-.idea/copyright/profiles_settings.xml
 .idea/encodings.xml
 .idea/misc.xml
 .idea/modules.xml
