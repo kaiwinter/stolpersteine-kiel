@@ -53,6 +53,12 @@
         <license>Apache Software License 2.0</license>
     </notice>
     <notice>
+        <name>Realm-Java</name>
+        <url>https://github.com/realm/realm-java</url>
+        <copyright>Realm Inc</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
         <name>Google Maps</name>
         <url>https://www.google.com</url>
         <license>Google Maps Android API v2</license>
