@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\dev\\android-keystore')
+            storePassword '***REMOVED***'
+            keyPassword '***REMOVED***'
+            keyAlias 'android'
+        }
+    }
     compileSdkVersion 29
 
     compileOptions {
@@ -13,6 +21,7 @@ android {
         applicationId "de.vrlfr.stolpersteine"
         minSdkVersion 14
         targetSdkVersion 29
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
@@ -31,11 +40,11 @@ android {
 dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 
     implementation 'com.github.thebestpol:ParallaxScroll:12665d54d5'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'de.psdev.licensesdialog:licensesdialog:2.1.0'
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
-    implementation 'com.github.MikeOrtiz:TouchImageView:2.3.0'
+    implementation 'com.github.MikeOrtiz:TouchImageView:3.0.3'
 }
