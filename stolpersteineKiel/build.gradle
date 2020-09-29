@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
 android {
+    signingConfigs {
+        release
+    }
     compileSdkVersion 29
 
     compileOptions {
@@ -19,6 +22,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -28,14 +32,35 @@ android {
     }
 }
 
+Properties props = new Properties()
+def propFile = new File('keystore.properties')
+if (propFile.canRead()){
+    props.load(new FileInputStream(propFile))
+
+    if (props != null && props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+            props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+        android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+        android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+        android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+        android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+    } else {
+        println 'keystore.properties found but some entries are missing'
+        android.buildTypes.release.signingConfig = null
+    }
+} else {
+    println 'keystore.properties not found'
+    android.buildTypes.release.signingConfig = null
+
+}
+
 dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 
     implementation 'com.github.thebestpol:ParallaxScroll:12665d54d5'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'de.psdev.licensesdialog:licensesdialog:2.1.0'
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
-    implementation 'com.github.MikeOrtiz:TouchImageView:2.3.0'
+    implementation 'com.github.MikeOrtiz:TouchImageView:3.0.3'
 }

@@ -21,3 +21,4 @@ local.properties
 .idea/vcs.xml
 *.iml
 caches
+/keystore.properties
