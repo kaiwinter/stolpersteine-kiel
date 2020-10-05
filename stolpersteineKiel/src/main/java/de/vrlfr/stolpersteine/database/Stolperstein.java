@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 public class Stolperstein extends RealmObject implements Parcelable {
 
