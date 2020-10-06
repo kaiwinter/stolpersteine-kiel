@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.0.88
 # min_api: 14
-# pg_map_id: f712129
+# pg_map_id: 2ce2fec
 # common_typos_disable
 $r8$backportedMethods$utility$Objects$2$equals -> a:
     boolean equals(java.lang.Object,java.lang.Object) -> a
@@ -9531,13 +9531,14 @@ com.ortiz.touchview.TouchImageView$ZoomVariables -> com.ortiz.touchview.TouchIma
     float getFocusY() -> b
     float getScale() -> c
     android.widget.ImageView$ScaleType getScaleType() -> d
-com.shockwave.pdfium.PdfDocument -> com.shockwave.pdfium.PdfDocument:
+com.shockwave.pdfium.PdfDocument -> com.shockwave.pdfium.a:
     android.os.ParcelFileDescriptor parcelFileDescriptor -> b
     java.util.Map mNativePagesPtr -> c
     long mNativeDocPtr -> a
-com.shockwave.pdfium.PdfDocument$Bookmark -> com.shockwave.pdfium.PdfDocument$Bookmark:
+com.shockwave.pdfium.PdfDocument$Bookmark -> com.shockwave.pdfium.a$a:
     java.util.List children -> a
     java.util.List getChildren() -> a
+com.shockwave.pdfium.PdfDocument$Meta -> com.shockwave.pdfium.a$b:
 com.shockwave.pdfium.PdfiumCore -> com.shockwave.pdfium.PdfiumCore:
     java.lang.Object lock -> e
     java.lang.reflect.Field mFdField -> d
