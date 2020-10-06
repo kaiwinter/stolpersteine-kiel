@@ -109,7 +109,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         return stolpersteineList.size();
     }
 
-    private final class MotionRowViewHolder {
+    private static final class MotionRowViewHolder {
         public TextView textViewNamen;
     }
 
