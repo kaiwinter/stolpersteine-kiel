@@ -22,24 +22,7 @@
 # Picasso
 -dontwarn com.squareup.okhttp.**
 
-# Appcompat
--dontwarn android.support.v7.**
--keep class android.support.v7.** { *; }
--keep interface android.support.v7.** { *; }
-
 # Fix BadParcelableException
 -keep class * implements android.os.Parcelable {
     public static final ** CREATOR;
 }
-
-# 23
--keep class org.apache.http.** { *; }
--keepclassmembers class org.apache.http.** {*;}
--dontwarn org.apache.**
-
--keep class android.net.http.** { *; }
--keepclassmembers class android.net.http.** {*;}
--dontwarn android.net.**
-
-# https://github.com/barteksc/AndroidPdfViewer
--keep class com.shockwave.**

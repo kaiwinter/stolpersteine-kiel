@@ -222,7 +222,7 @@ public class MapFragment extends Fragment {
         return adresse2Stolpersteine;
     }
 
-    private class InfoWindowRefresher implements Callback {
+    private static class InfoWindowRefresher implements Callback {
         private final Marker markerToRefresh;
 
         private InfoWindowRefresher(Marker markerToRefresh) {

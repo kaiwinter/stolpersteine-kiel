@@ -3,12 +3,7 @@ apply plugin: 'realm-android'
 
 android {
     signingConfigs {
-        release {
-            storeFile file('C:\\dev\\android-keystore')
-            storePassword '***REMOVED***'
-            keyPassword '***REMOVED***'
-            keyAlias 'android'
-        }
+        release
     }
     compileSdkVersion 29
 
@@ -21,13 +16,13 @@ android {
         applicationId "de.vrlfr.stolpersteine"
         minSdkVersion 14
         targetSdkVersion 29
-        signingConfig signingConfigs.release
     }
 
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -35,6 +30,27 @@ android {
         cruncherEnabled = false
         noCompress "pdf"
     }
+}
+
+Properties props = new Properties()
+def propFile = new File('keystore.properties')
+if (propFile.canRead()){
+    props.load(new FileInputStream(propFile))
+
+    if (props != null && props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+            props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+        android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+        android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+        android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+        android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+    } else {
+        println 'keystore.properties found but some entries are missing'
+        android.buildTypes.release.signingConfig = null
+    }
+} else {
+    println 'keystore.properties not found'
+    android.buildTypes.release.signingConfig = null
+
 }
 
 dependencies {

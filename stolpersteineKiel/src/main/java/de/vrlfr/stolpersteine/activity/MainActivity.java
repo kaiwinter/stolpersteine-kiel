@@ -134,8 +134,10 @@ public class MainActivity extends BaseActivity {
 				InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
 				if (inputManager != null) {
-					inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-							InputMethodManager.HIDE_NOT_ALWAYS);
+					View currentFocus = getCurrentFocus();
+					if (currentFocus != null) {
+						inputManager.hideSoftInputFromWindow(currentFocus.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+					}
 				}
 			}
 		};
