@@ -1,21 +1,33 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
-        classpath "io.realm:realm-gradle-plugin:6.1.1"
+        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath "io.realm:realm-gradle-plugin:10.6.1"
     }
 }
 plugins {
-    id "com.github.ben-manes.versions" version "0.33.0"
+    id "com.github.ben-manes.versions" version "0.39.0"
 }
 allprojects {
     repositories {
-        jcenter()
         google()
-        maven { url "https://jitpack.io" }
+        mavenCentral()
+        maven {url "https://jitpack.io"}
+    }
+}
+
+// exclude betas etc. from com.github.ben-manes.versions
+dependencyUpdates.resolutionStrategy {
+    componentSelection { rules ->
+        rules.all { ComponentSelection selection ->
+            boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm'].any { qualifier ->
+                selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+            }
+            if (rejected) {
+                selection.reject('Release candidate')
+            }
+        }
     }
 }
