@@ -6,37 +6,40 @@ import android.content.SharedPreferences;
 public class SharedPrefUtil {
 
     private static final String SETTINGS_PREF_FILE = "stngs";
-    private static final  String LAST_REALM_DB_UPDATE_VERSION = "lrduv";
+    private static final String LAST_REALM_DB_UPDATE_VERSION = "lrduv";
 
     /**
      * @return Die App-Version, in der zuletzt die Realm-Datenbank upgedatet wurde, -1, wenn kein vorheriges Update statt fand.
      */
     public static int getLastRealmDbUpdateVersion(Context context) {
-        return getNullsafe(context, SETTINGS_PREF_FILE, LAST_REALM_DB_UPDATE_VERSION, -1);
+        return getNullsafe(context);
     }
 
     public static void setLastRealmDbUpdateVersion(Context context, int level) {
-        setNullsafe(context, SETTINGS_PREF_FILE, LAST_REALM_DB_UPDATE_VERSION, level);
+        setNullsafe(context, level);
     }
 
-    private static int getNullsafe(Context context, String preferencesFile, String key, int defaultValue) {
+    private static int getNullsafe(Context context) {
         if (context == null || context.getApplicationContext() == null) {
-            return defaultValue;
+            return -1;
         }
 
-        return context.getApplicationContext().getSharedPreferences(preferencesFile, Context.MODE_PRIVATE)
-                .getInt(key, defaultValue);
+        return context
+                .getApplicationContext()
+                .getSharedPreferences(SharedPrefUtil.SETTINGS_PREF_FILE, Context.MODE_PRIVATE)
+                .getInt(SharedPrefUtil.LAST_REALM_DB_UPDATE_VERSION, -1);
     }
 
-    private static void setNullsafe(Context context, String preferencesFile, String key, int value) {
+    private static void setNullsafe(Context context, int value) {
         if (context == null || context.getApplicationContext() == null) {
             return;
         }
 
-        SharedPreferences preferences = context.getApplicationContext().getSharedPreferences(preferencesFile,
-                Context.MODE_PRIVATE);
+        SharedPreferences preferences = context
+                .getApplicationContext()
+                .getSharedPreferences(SharedPrefUtil.SETTINGS_PREF_FILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(key, value);
+        editor.putInt(SharedPrefUtil.LAST_REALM_DB_UPDATE_VERSION, value);
         editor.apply();
     }
 }
