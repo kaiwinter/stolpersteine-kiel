@@ -59,7 +59,6 @@ public class StolpersteinActivity extends BaseActivity {
     private void handleExtras(final Bundle extras) {
         List<Stolperstein> parcelableArrayList = extras.getParcelableArrayList(STOLPERSTEINE_EXTRA);
         Map<ImageBioId, Collection<Stolperstein>> imageBio2Stolperstein = new HashMap<>();
-        final boolean[] hasBiografie = {false};
         for (Stolperstein stolperstein : parcelableArrayList) {
             int imageId = stolperstein.imageId;
             int bioId = stolperstein.bioId;
@@ -71,10 +70,6 @@ public class StolpersteinActivity extends BaseActivity {
                 imageBio2Stolperstein.put(imageBioId, stolpersteine);
             }
             stolpersteine.add(stolperstein);
-
-            if (stolperstein.bioId > -1) {
-                hasBiografie[0] = true;
-            }
         }
 
         Stolperstein stolperstein = parcelableArrayList.iterator().next();
