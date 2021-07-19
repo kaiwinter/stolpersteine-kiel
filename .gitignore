@@ -13,12 +13,5 @@ local.properties
 .gradle/
 
 # User-specific configurations
-.idea/libraries/
-.idea/workspace.xml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-*.iml
-caches
+.idea
 /keystore.properties
