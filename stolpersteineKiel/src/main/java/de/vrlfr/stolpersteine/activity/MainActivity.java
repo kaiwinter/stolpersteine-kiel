@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -116,13 +115,7 @@ public class MainActivity extends BaseActivity {
 			}
 		};
 		drawerList.setAdapter(drawerListAdapter);
-		drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				selectItem(position);
-			}
-		});
+		drawerList.setOnItemClickListener((parent, view, position, id) -> selectItem(position));
 	}
 
 	private void setupDrawer() {

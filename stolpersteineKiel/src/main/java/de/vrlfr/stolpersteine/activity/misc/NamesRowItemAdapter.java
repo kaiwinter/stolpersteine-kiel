@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -73,14 +72,10 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         if (imageResource > 0) {
             Picasso.with(getContext()).load(imageResource).error(android.R.drawable.ic_delete)
                     .into(stolpersteinBildImageView);
-            stolpersteinBildImageView.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    Intent intent = FullscreenImageActivity.newIntent(v.getContext(), imageResource,
-                            stolperstein.adresse);
-                    NamesRowItemAdapter.this.getContext().startActivity(intent);
-                }
+            stolpersteinBildImageView.setOnClickListener(v -> {
+                Intent intent = FullscreenImageActivity.newIntent(v.getContext(), imageResource,
+                        stolperstein.adresse);
+                NamesRowItemAdapter.this.getContext().startActivity(intent);
             });
         }
 
@@ -88,13 +83,9 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         if (stolperstein.bioId == -1) {
             biografieImageViewPdf.setVisibility(View.GONE);
         } else {
-            biografieImageViewPdf.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    Intent intent = FullscreenPDFActivity.newIntent(v.getContext(), stolperstein.bioId);
-                    NamesRowItemAdapter.this.getContext().startActivity(intent);
-                }
+            biografieImageViewPdf.setOnClickListener(v -> {
+                Intent intent = FullscreenPDFActivity.newIntent(v.getContext(), stolperstein.bioId);
+                NamesRowItemAdapter.this.getContext().startActivity(intent);
             });
         }
 

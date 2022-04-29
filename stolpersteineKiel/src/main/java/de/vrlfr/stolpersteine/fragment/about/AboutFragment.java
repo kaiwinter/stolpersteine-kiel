@@ -4,7 +4,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import de.psdev.licensesdialog.LicenseResolver;
@@ -17,14 +16,10 @@ public class AboutFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_about, container, false);
 
-		rootView.findViewById(R.id.librariesButton).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				LicenseResolver.registerLicense(new GoogleMapLicense());
-				new LicensesDialog.Builder(getActivity()).setNotices(R.raw.notices)
-						.setTitle(R.string.software_lizenzen).build().show();
-			}
+		rootView.findViewById(R.id.librariesButton).setOnClickListener(v -> {
+			LicenseResolver.registerLicense(new GoogleMapLicense());
+			new LicensesDialog.Builder(getActivity()).setNotices(R.raw.notices)
+					.setTitle(R.string.software_lizenzen).build().show();
 		});
 		return rootView;
 	}

@@ -75,24 +75,20 @@ public class MapFragment extends Fragment {
             FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
             beginTransaction.replace(R.id.map_container, mapFragment);
             beginTransaction.commit();
-            mapFragment.getMapAsync(new OnMapReadyCallback() {
-
-                @Override
-                public void onMapReady(GoogleMap map) {
-                    MapFragment.this.map = map;
-                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                            && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_LOCATION_PERMISSIONS);
-                    } else {
-                        map.setMyLocationEnabled(true);
-                    }
-                    map.getUiSettings().setRotateGesturesEnabled(false);
-                    map.getUiSettings().setTiltGesturesEnabled(false);
-                    map.getUiSettings().setZoomControlsEnabled(true);
-                    CameraPosition cp = CameraPosition.builder().target(KIEL).zoom(12).build();
-                    map.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
-                    initMarkers(map);
+            mapFragment.getMapAsync(map -> {
+                MapFragment.this.map = map;
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_LOCATION_PERMISSIONS);
+                } else {
+                    map.setMyLocationEnabled(true);
                 }
+                map.getUiSettings().setRotateGesturesEnabled(false);
+                map.getUiSettings().setTiltGesturesEnabled(false);
+                map.getUiSettings().setZoomControlsEnabled(true);
+                CameraPosition cp = CameraPosition.builder().target(KIEL).zoom(12).build();
+                map.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
+                initMarkers(map);
             });
         }
         return view;
@@ -162,42 +158,35 @@ public class MapFragment extends Fragment {
             }
         });
 
-        OnInfoWindowClickListener onInfoWindowClickListener = new OnInfoWindowClickListener() {
-
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                LatLng latLng = marker.getPosition();
-                ArrayList<Stolperstein> arrayList = adresse2Stolpersteine.get(marker.getTitle());
-                Intent intent = StolpersteinActivity.newIntent(getActivity(), arrayList, latLng);
-                startActivity(intent);
-            }
+        OnInfoWindowClickListener onInfoWindowClickListener = marker -> {
+            LatLng latLng = marker.getPosition();
+            ArrayList<Stolperstein> arrayList = adresse2Stolpersteine.get(marker.getTitle());
+            Intent intent = StolpersteinActivity.newIntent(getActivity(), arrayList, latLng);
+            startActivity(intent);
         };
         map.setOnInfoWindowClickListener(onInfoWindowClickListener);
 
         final Marker[] lastOpened = {null};
-        OnMarkerClickListener onMarkerClickListener = new OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                // Check if there is an open info window
-                if (lastOpened[0] != null) {
-                    // Close the info window
-                    lastOpened[0].hideInfoWindow();
-                }
-
-                // Open the info window for the marker
-                marker.showInfoWindow();
-
-                // Re-assign the last opened such that we can close it later
-                lastOpened[0] = marker;
-
-                float zoom = map.getCameraPosition().zoom;
-                LatLng lastPosition = new LatLng(marker.getPosition().latitude + 90 / Math.pow(2, zoom),
-                        marker.getPosition().longitude);
-                CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(lastPosition, zoom);
-                map.animateCamera(cu);
-
-                return true;
+        OnMarkerClickListener onMarkerClickListener = marker -> {
+            // Check if there is an open info window
+            if (lastOpened[0] != null) {
+                // Close the info window
+                lastOpened[0].hideInfoWindow();
             }
+
+            // Open the info window for the marker
+            marker.showInfoWindow();
+
+            // Re-assign the last opened such that we can close it later
+            lastOpened[0] = marker;
+
+            float zoom = map.getCameraPosition().zoom;
+            LatLng lastPosition = new LatLng(marker.getPosition().latitude + 90 / Math.pow(2, zoom),
+                    marker.getPosition().longitude);
+            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(lastPosition, zoom);
+            map.animateCamera(cu);
+
+            return true;
         };
 
         map.setOnMarkerClickListener(onMarkerClickListener);

@@ -59,13 +59,9 @@ public class AddMarkerToMapAsync extends
 
 		Activity activity = context.get();
 		if (activity != null) {
-			activity.runOnUiThread(new Runnable() {
-
-				@Override
-				public void run() {
-					// Muss im UI Thread ausgeführt werden
-					map.addMarker(marker);
-				}
+			activity.runOnUiThread(() -> {
+				// Muss im UI Thread ausgeführt werden
+				map.addMarker(marker);
 			});
 		}
 	}

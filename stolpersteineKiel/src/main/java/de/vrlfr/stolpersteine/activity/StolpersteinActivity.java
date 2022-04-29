@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -83,28 +82,24 @@ public class StolpersteinActivity extends BaseActivity {
             stolpersteinListView.addView(convertView);
         }
 
-        OnMapReadyCallback onMapReady = new OnMapReadyCallback() {
-
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                if (ActivityCompat.checkSelfPermission(StolpersteinActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                        && ActivityCompat.checkSelfPermission(StolpersteinActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    googleMap.setMyLocationEnabled(false);
-                }
-
-                googleMap.getUiSettings().setAllGesturesEnabled(false);
-
-                LatLng latLon = extras.getParcelable(STOLPERSTEINE_LATLNG_EXTRA);
-                CameraPosition cp = CameraPosition.builder().target(latLon).zoom(15).build();
-                googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
-
-                MarkerOptions marker = new MarkerOptions() //
-                        .position(latLon) //
-                        .title(adresse) //
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.stolperstein));
-
-                googleMap.addMarker(marker);
+        OnMapReadyCallback onMapReady = googleMap -> {
+            if (ActivityCompat.checkSelfPermission(StolpersteinActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(StolpersteinActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                googleMap.setMyLocationEnabled(false);
             }
+
+            googleMap.getUiSettings().setAllGesturesEnabled(false);
+
+            LatLng latLon = extras.getParcelable(STOLPERSTEINE_LATLNG_EXTRA);
+            CameraPosition cp = CameraPosition.builder().target(latLon).zoom(15).build();
+            googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
+
+            MarkerOptions marker = new MarkerOptions() //
+                    .position(latLon) //
+                    .title(adresse) //
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.stolperstein));
+
+            googleMap.addMarker(marker);
         };
         ((MapFragment) getFragmentManager().findFragmentById(R.id.staticmap)).getMapAsync(onMapReady);
     }

@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
@@ -60,18 +58,14 @@ public class ListFragment extends Fragment implements OnQueryTextListener {
 		searchView.setOnQueryTextListener(this);
 		stolpersteinList.setAdapter(adapter);
 
-		stolpersteinList.setOnItemClickListener(new OnItemClickListener() {
+		stolpersteinList.setOnItemClickListener((parent, view, position, id) -> {
+			Stolperstein stolperstein = adapter.getItem(position);
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Stolperstein stolperstein = adapter.getItem(position);
-
-				LatLng latLng = new LatLng(stolperstein.latitude, stolperstein.longitude);
-				ArrayList<Stolperstein> arrayList = new ArrayList<>(Collections
-						.singletonList(stolperstein));
-				Intent intent = StolpersteinActivity.newIntent(getActivity(), arrayList, latLng);
-				startActivity(intent);
-			}
+			LatLng latLng = new LatLng(stolperstein.latitude, stolperstein.longitude);
+			ArrayList<Stolperstein> arrayList = new ArrayList<>(Collections
+					.singletonList(stolperstein));
+			Intent intent = StolpersteinActivity.newIntent(getActivity(), arrayList, latLng);
+			startActivity(intent);
 		});
 
 		return rootView;
