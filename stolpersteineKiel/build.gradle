@@ -3,10 +3,7 @@ apply plugin: 'realm-android'
 apply plugin: 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 
 android {
-    signingConfigs {
-        release
-    }
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     compileOptions {
         sourceCompatibility 1.8
@@ -16,14 +13,13 @@ android {
     defaultConfig {
         applicationId "de.vrlfr.stolpersteine"
         minSdkVersion 16
-        targetSdkVersion 31
+        targetSdkVersion 32
     }
 
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
-            signingConfig signingConfigs.release
         }
     }
     androidResources {
@@ -32,30 +28,8 @@ android {
 
 }
 
-Properties props = new Properties()
-def propFile = new File('keystore.properties')
-if (propFile.canRead()){
-    props.load(new FileInputStream(propFile))
-
-    if (props != null && props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
-            props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
-        android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
-        android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
-        android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
-        android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
-    } else {
-        println 'keystore.properties found but some entries are missing'
-        android.buildTypes.release.signingConfig = null
-    }
-} else {
-    println 'keystore.properties not found'
-    android.buildTypes.release.signingConfig = null
-
-}
-
 dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
 
     implementation 'com.github.thebestpol:ParallaxScroll:12665d54d5'
