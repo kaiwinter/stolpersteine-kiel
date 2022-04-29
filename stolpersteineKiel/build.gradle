@@ -6,7 +6,7 @@ android {
     signingConfigs {
         release
     }
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     compileOptions {
         sourceCompatibility 1.8
@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "de.vrlfr.stolpersteine"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 31
     }
 
     buildTypes {
@@ -26,11 +26,10 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
-    aaptOptions {
-        cruncherEnabled = false
-        noCompress "pdf"
+    androidResources {
+        noCompress 'pdf'
     }
+
 }
 
 Properties props = new Properties()
@@ -57,11 +56,11 @@ if (propFile.canRead()){
 dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
 
     implementation 'com.github.thebestpol:ParallaxScroll:12665d54d5'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'de.psdev.licensesdialog:licensesdialog:2.2.0'
-    implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.1'
-    implementation 'com.github.MikeOrtiz:TouchImageView:3.1.0'
+    implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.2'
+    implementation 'com.github.MikeOrtiz:TouchImageView:3.2.0'
 }
