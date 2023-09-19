@@ -43,7 +43,7 @@ public class FullscreenImageActivity extends BaseActivity {
 		TouchImageView imageView = findViewById(R.id.full_image);
 		imageView.setMaxZoom(6);
 
-		Picasso.with(this).load(imageId).error(android.R.drawable.ic_delete).into(imageView);
+		Picasso.get().load(imageId).error(android.R.drawable.ic_delete).into(imageView);
 
 		String adresse = extras.getString(INTENT_EXTRA_ADRESSE);
 		getSupportActionBar().setTitle(adresse);

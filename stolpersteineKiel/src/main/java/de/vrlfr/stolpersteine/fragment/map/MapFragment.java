@@ -137,11 +137,11 @@ public class MapFragment extends Fragment {
                         if (firstTime[0]) {
                             // if it's the first time, load the image with the callback set
                             firstTime[0] = false;
-                            Picasso.with(activity).load(imageResource).resize(128, 128).centerCrop()
+                            Picasso.get().load(imageResource).resize(128, 128).centerCrop()
                                     .into(imageView, new InfoWindowRefresher(marker));
                         } else {
 
-                            Picasso.with(activity).load(imageResource).resize(128, 128).centerCrop().into(imageView);
+                            Picasso.get().load(imageResource).resize(128, 128).centerCrop().into(imageView);
                             firstTime[0] = true;
                         }
                     }
@@ -224,7 +224,7 @@ public class MapFragment extends Fragment {
         }
 
         @Override
-        public void onError() {
+        public void onError(Exception e) {
         }
     }
 }

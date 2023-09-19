@@ -3,17 +3,17 @@ apply plugin: 'realm-android'
 apply plugin: 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 
 android {
-    compileSdkVersion 32
+    compileSdk 33
 
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility 17
+        targetCompatibility 17
     }
 
     defaultConfig {
         applicationId "de.vrlfr.stolpersteine"
-        minSdkVersion 16
-        targetSdkVersion 32
+        minSdkVersion 19
+        targetSdkVersion 33
     }
 
     buildTypes {
@@ -22,19 +22,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
-    androidResources {
-        noCompress 'pdf'
+    aaptOptions {
+        noCompress = ['.pdf', '.realm']
     }
+    namespace 'de.vrlfr.stolpersteine'
 
 }
 
 dependencies {
-    implementation 'com.google.android.gms:play-services-maps:17.0.1'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 
     implementation 'com.github.thebestpol:ParallaxScroll:12665d54d5'
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'de.psdev.licensesdialog:licensesdialog:2.2.0'
-    implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.2'
-    implementation 'com.github.MikeOrtiz:TouchImageView:3.2.0'
+    implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.3'
+    implementation 'com.github.MikeOrtiz:TouchImageView:3.2.1'
 }

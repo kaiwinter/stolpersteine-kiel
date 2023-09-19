@@ -70,7 +70,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         final int imageResource = getContext().getResources().getIdentifier(uri, null, getContext().getPackageName());
 
         if (imageResource > 0) {
-            Picasso.with(getContext()).load(imageResource).error(android.R.drawable.ic_delete)
+            Picasso.get().load(imageResource).error(android.R.drawable.ic_delete)
                     .into(stolpersteinBildImageView);
             stolpersteinBildImageView.setOnClickListener(v -> {
                 Intent intent = FullscreenImageActivity.newIntent(v.getContext(), imageResource,
