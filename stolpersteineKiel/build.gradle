@@ -22,10 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
-    aaptOptions {
-        noCompress = ['.pdf', '.realm']
-    }
     namespace 'de.vrlfr.stolpersteine'
+    androidResources {
+        noCompress '.pdf', '.realm'
+    }
 
 }
 
