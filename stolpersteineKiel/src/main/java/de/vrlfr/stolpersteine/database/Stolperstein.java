@@ -51,7 +51,7 @@ public class Stolperstein extends RealmObject implements Parcelable {
 		dest.writeInt(bioId);
 	}
 
-	public static final Parcelable.Creator<Stolperstein> CREATOR = new Parcelable.Creator<Stolperstein>() {
+	public static final Parcelable.Creator<Stolperstein> CREATOR = new Parcelable.Creator<>() {
 
 		@Override
 		public Stolperstein createFromParcel(Parcel source) {
