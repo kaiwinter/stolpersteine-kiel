@@ -3,7 +3,7 @@ apply plugin: 'realm-android'
 apply plugin: 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     compileOptions {
         sourceCompatibility 17
@@ -14,6 +14,7 @@ android {
         applicationId "de.vrlfr.stolpersteine"
         minSdkVersion 19
         targetSdkVersion 33
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -30,6 +31,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.multidex:multidex:2.0.1'
+
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
@@ -38,4 +41,6 @@ dependencies {
     implementation 'de.psdev.licensesdialog:licensesdialog:2.2.0'
     implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.3'
     implementation 'com.github.MikeOrtiz:TouchImageView:3.2.1'
+
+    implementation 'com.google.android.material:material:1.10.0'
 }

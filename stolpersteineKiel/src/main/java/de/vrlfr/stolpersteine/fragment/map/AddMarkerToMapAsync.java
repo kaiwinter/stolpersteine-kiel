@@ -56,7 +56,6 @@ public class AddMarkerToMapAsync extends
 				.title(adresse) //
 				.icon(BitmapDescriptorFactory.fromResource(R.drawable.stolperstein)) //
 				.snippet(namen);
-
 		Activity activity = context.get();
 		if (activity != null) {
 			activity.runOnUiThread(() -> {

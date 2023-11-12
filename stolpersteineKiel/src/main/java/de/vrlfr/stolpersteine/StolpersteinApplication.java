@@ -1,14 +1,15 @@
 package de.vrlfr.stolpersteine;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
+
+import androidx.multidex.MultiDexApplication;
 
 import de.vrlfr.stolpersteine.preferences.SharedPrefUtil;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class StolpersteinApplication extends Application {
+public class StolpersteinApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
