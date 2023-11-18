@@ -1,5 +1,6 @@
 package de.vrlfr.stolpersteine.database;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -75,5 +76,15 @@ public class Stolperstein extends RealmObject implements Parcelable {
 
 	public static String getBioTxtAssetName(int bioId) {
 		return "id" + bioId + ".md";
+	}
+
+	/**
+	 * Gibt die Resource ID (in @drawable) für eine Image ID eines Stolpersteins zurück.
+	 * @param context Context für den Zugriff auf die Resources
+	 * @return Resource ID des Fotos
+	 */
+	public int getResourceIdForImageId(Context context) {
+		String uri = "@drawable/id" + imageId;
+		return context.getResources().getIdentifier(uri, null, context.getPackageName());
 	}
 }

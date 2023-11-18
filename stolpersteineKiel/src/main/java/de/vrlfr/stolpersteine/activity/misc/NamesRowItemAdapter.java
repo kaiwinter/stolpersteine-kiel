@@ -71,8 +71,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 
         final Stolperstein stolperstein = stolpersteine.iterator().next();
         ImageView stolpersteinBildImageView = convertView.findViewById(R.id.stolpersteinBild);
-        String uri = "@drawable/id" + stolperstein.imageId;
-        final int imageResource = getContext().getResources().getIdentifier(uri, null, getContext().getPackageName());
+        int imageResource = stolperstein.getResourceIdForImageId(getContext());
 
         if (imageResource > 0) {
             Picasso.get().load(imageResource).error(android.R.drawable.ic_delete)

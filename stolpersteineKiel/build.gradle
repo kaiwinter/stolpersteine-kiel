@@ -15,6 +15,8 @@ android {
         minSdkVersion 19
         targetSdkVersion 33
         multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -27,7 +29,6 @@ android {
     androidResources {
         noCompress '.pdf', '.realm'
     }
-
 }
 
 task cleanupRealm(type: Delete) {
@@ -57,4 +58,7 @@ dependencies {
     implementation "io.noties.markwon:core:4.6.2"
     implementation "io.noties.markwon:image:4.6.2"
     implementation 'com.google.android.material:material:1.10.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 }

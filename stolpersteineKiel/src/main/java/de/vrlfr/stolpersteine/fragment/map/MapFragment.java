@@ -128,10 +128,7 @@ public class MapFragment extends Fragment {
                 Stolperstein stolperstein = adresse2Stolpersteine.get(marker.getTitle()).iterator().next();
                 ImageView imageView = myContentsView.findViewById(R.id.marker_image);
                 if (stolperstein.imageId > -1) {
-
-                    String uri = "@drawable/id" + stolperstein.imageId;
-
-                    int imageResource = activity.getResources().getIdentifier(uri, null, activity.getPackageName());
+                    int imageResource = stolperstein.getResourceIdForImageId(activity);
                     if (imageResource != 0) {
                         if (firstTime[0]) {
                             // if it's the first time, load the image with the callback set
