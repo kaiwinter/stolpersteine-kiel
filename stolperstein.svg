@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="28"
+   height="34"
+   viewBox="0 0 28 34"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="stolperstein.svg"
+   inkscape:version="1.3.1 (91b66b0, 2023-11-16)"
+   inkscape:export-filename="../../../../stolperstein.png"
+   inkscape:export-xdpi="144"
+   inkscape:export-ydpi="144"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="true"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="false"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="9.514435"
+     inkscape:cx="44.774072"
+     inkscape:cy="45.825107"
+     inkscape:window-width="2512"
+     inkscape:window-height="1387"
+     inkscape:window-x="1728"
+     inkscape:window-y="64"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g41"
+     showborder="true"
+     borderlayer="true"
+     shape-rendering="auto"
+     labelstyle="default"
+     showguides="false">
+    <sodipodi:guide
+       position="-12.139449,45.24607"
+       orientation="0,-1"
+       id="guide1"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter164"
+       x="-0.022084042"
+       y="-0.04710351"
+       width="1.0708619"
+       height="1.0913459">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         id="feFlood163" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="1.600000"
+         id="feGaussianBlur163" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="1.400000"
+         dy="1.400000"
+         id="feOffset163" />
+      <feComposite
+         result="comp1"
+         operator="in"
+         in="flood"
+         in2="offset"
+         id="feComposite163" />
+      <feComposite
+         result="fbSourceGraphic"
+         operator="over"
+         in="SourceGraphic"
+         in2="comp1"
+         id="feComposite164" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix164" />
+      <feFlood
+         id="feFlood164"
+         result="flood"
+         in="fbSourceGraphic"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)" />
+      <feGaussianBlur
+         id="feGaussianBlur164"
+         result="blur"
+         in="fbSourceGraphic"
+         stdDeviation="1.600000" />
+      <feOffset
+         id="feOffset164"
+         result="offset"
+         in="blur"
+         dx="1.400000"
+         dy="1.400000" />
+      <feComposite
+         id="feComposite165"
+         result="comp1"
+         operator="in"
+         in="flood"
+         in2="offset" />
+      <feComposite
+         id="feComposite166"
+         result="comp2"
+         operator="over"
+         in="fbSourceGraphic"
+         in2="comp1" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter41"
+       x="-0.056906143"
+       y="-0.043682759"
+       width="1.1480249"
+       height="1.1039985">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         id="feFlood40" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="1.600000"
+         id="feGaussianBlur40" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="3.000000"
+         dy="1.900000"
+         id="feOffset40" />
+      <feComposite
+         result="comp1"
+         operator="in"
+         in="flood"
+         in2="offset"
+         id="feComposite40" />
+      <feComposite
+         result="comp2"
+         operator="over"
+         in="SourceGraphic"
+         in2="comp1"
+         id="feComposite41" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter41-9"
+       x="-0.060082839"
+       y="-0.046121281"
+       width="1.1543783"
+       height="1.1088755">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         id="feFlood40-8" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="1.600000"
+         id="feGaussianBlur40-6" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="3.000000"
+         dy="1.900000"
+         id="feOffset40-5" />
+      <feComposite
+         result="comp1"
+         operator="in"
+         in="flood"
+         in2="offset"
+         id="feComposite40-7" />
+      <feComposite
+         result="comp2"
+         operator="over"
+         in="SourceGraphic"
+         in2="comp1"
+         id="feComposite41-6" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g143"
+       transform="matrix(0.26458333,0,0,0.26458333,-15.243715,-46.721555)"
+       style="filter:url(#filter164)"
+       inkscape:export-filename="rastergrafik.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <g
+         id="g11"
+         transform="translate(34.162761,194.25105)">
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:#636363;stroke-width:2.84069;stroke-dasharray:none;stroke-opacity:1"
+           id="rect21"
+           width="53.036751"
+           height="53.036751"
+           x="79.507324"
+           y="198.90799" />
+        <text
+           xml:space="preserve"
+           style="font-size:4.02959px;line-height:1.25;font-family:sans-serif;stroke-width:3.02221"
+           x="91.080986"
+           y="208.33876"
+           id="text21"><tspan
+             sodipodi:role="line"
+             id="tspan21"
+             x="91.080986"
+             y="208.33876"
+             style="font-size:4.02959px;stroke-width:3.02221">HIER WOHNTE</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:6.0444px;line-height:1.25;font-family:sans-serif;stroke-width:3.02221"
+           x="88.770515"
+           y="215.88083"
+           id="text23"><tspan
+             sodipodi:role="line"
+             id="tspan22"
+             x="88.770515"
+             y="215.88083"
+             style="font-size:6.0444px;stroke-width:3.02221">ELISABETH</tspan><tspan
+             sodipodi:role="line"
+             x="88.770515"
+             y="223.43633"
+             id="tspan23"
+             style="font-size:6.0444px;stroke-width:3.02221">BANDHOLZ</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:4.02959px;line-height:1.25;font-family:sans-serif;stroke-width:3.02221"
+           x="95.282692"
+           y="229.85716"
+           id="text24"><tspan
+             sodipodi:role="line"
+             id="tspan24"
+             x="95.282692"
+             y="229.85716"
+             style="stroke-width:3.02221">GEB. 1919</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:4.02959px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:3.02221"
+           x="106.03062"
+           y="236.36879"
+           id="text27"><tspan
+             sodipodi:role="line"
+             id="tspan25"
+             x="106.03062"
+             y="236.36879"
+             style="stroke-width:3.02221">GEFANGEN UND</tspan><tspan
+             sodipodi:role="line"
+             x="106.03062"
+             y="241.40578"
+             id="tspan26"
+             style="text-align:center;text-anchor:middle;stroke-width:3.02221">DEPORTIERT</tspan><tspan
+             sodipodi:role="line"
+             x="106.03062"
+             y="246.44276"
+             id="tspan27"
+             style="stroke-width:3.02221">17.05.1940</tspan></text>
+      </g>
+      <g
+         id="g32"
+         transform="translate(-151.40084,94.941527)">
+        <path
+           d="m 106.2519,177.26757 c 69.78018,-0.32925 40.95728,68.46014 40.95728,68.46014 0,0 -33.59363,68.15562 -41.78835,68.15562 -8.19445,0 -42.010947,-68.15562 -42.010947,-68.15562 0,0 -26.93813,-68.13089 42.842017,-68.46014 z"
+           fill="none"
+           opacity="1"
+           stroke-linejoin="round"
+           stroke-width="1.36198"
+           id="path10-4"
+           style="fill:#d69f36;fill-opacity:1;stroke:#8a6421;stroke-opacity:1"
+           stroke="#000000" />
+        <g
+           id="g17"
+           transform="translate(-0.3238418,-3.2008688)">
+          <rect
+             style="fill:#ffffff;fill-opacity:1;stroke:#636363;stroke-width:2.84069;stroke-dasharray:none;stroke-opacity:1"
+             id="rect11"
+             width="53.036751"
+             height="53.036751"
+             x="79.507324"
+             y="198.90799" />
+          <text
+             xml:space="preserve"
+             style="font-size:4.02959px;line-height:1.25;font-family:sans-serif;stroke-width:3.02221"
+             x="91.080986"
+             y="208.33876"
+             id="text11"><tspan
+               sodipodi:role="line"
+               id="tspan11"
+               x="91.080986"
+               y="208.33876"
+               style="font-size:4.02959px;stroke-width:3.02221">HIER WOHNTE</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:6.0444px;line-height:1.25;font-family:sans-serif;stroke-width:3.02221"
+             x="88.770515"
+             y="215.88083"
+             id="text13"><tspan
+               sodipodi:role="line"
+               id="tspan12"
+               x="88.770515"
+               y="215.88083"
+               style="font-size:6.0444px;stroke-width:3.02221">ELISABETH</tspan><tspan
+               sodipodi:role="line"
+               x="88.770515"
+               y="223.43633"
+               id="tspan13"
+               style="font-size:6.0444px;stroke-width:3.02221">BANDHOLZ</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:4.02959px;line-height:1.25;font-family:sans-serif;stroke-width:3.02221"
+             x="95.282692"
+             y="229.85716"
+             id="text14"><tspan
+               sodipodi:role="line"
+               id="tspan14"
+               x="95.282692"
+               y="229.85716"
+               style="stroke-width:3.02221">GEB. 1919</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:4.02959px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:3.02221"
+             x="106.03062"
+             y="236.36879"
+             id="text17"><tspan
+               sodipodi:role="line"
+               id="tspan15"
+               x="106.03062"
+               y="236.36879"
+               style="stroke-width:3.02221">GEFANGEN UND</tspan><tspan
+               sodipodi:role="line"
+               x="106.03062"
+               y="241.40578"
+               id="tspan16"
+               style="text-align:center;text-anchor:middle;stroke-width:3.02221">DEPORTIERT</tspan><tspan
+               sodipodi:role="line"
+               x="106.03062"
+               y="246.44276"
+               id="tspan17"
+               style="stroke-width:3.02221">17.05.1940</tspan></text>
+        </g>
+      </g>
+      <g
+         id="g41"
+         transform="translate(7.1314377,6.9444466)">
+        <path
+           d="m 271.40316,170.27075 h -73.65709 c -3.87401,0 -7.01496,3.14095 -7.01496,7.01496 v 67.02831 c 0,1.98875 0.84443,3.88366 2.32195,5.21387 l 36.82855,33.1457 c 1.3346,1.20043 3.0138,1.82827 4.69301,1.82827 1.6792,0 3.35841,-0.62784 4.69301,-1.82827 l 36.82854,-33.1457 c 1.47841,-1.33021 2.32196,-3.22512 2.32196,-5.21387 v -67.02831 c 0,-3.87401 -3.14095,-7.01496 -7.01497,-7.01496 z"
+           id="path1-0"
+           style="fill:#d69f36;fill-opacity:1;stroke:#8a6421;stroke-width:2.29986;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter41)"
+           sodipodi:nodetypes="ssssccsccsss" />
+        <g
+           id="g1"
+           transform="translate(-2.0623871,-0.01845987)">
+          <path
+             d="M 140.78692,175.84583 H 67.129825 c -3.874008,0 -7.014964,3.14095 -7.014964,7.01496 v 67.02831 c 0,1.98875 0.84443,3.88366 2.321954,5.21387 l 36.828553,33.1457 c 1.334592,1.20043 3.013802,1.82827 4.693012,1.82827 1.6792,0 3.35841,-0.62784 4.69301,-1.82827 l 36.82854,-33.1457 c 1.47841,-1.33021 2.32196,-3.22512 2.32196,-5.21387 v -67.02831 c 0,-3.87401 -3.14095,-7.01496 -7.01497,-7.01496 z"
+             id="path1"
+             style="fill:#d69f36;fill-opacity:1;stroke:#8a6421;stroke-width:2.29986;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter41)"
+             sodipodi:nodetypes="ssssccsccsss" />
+          <g
+             id="g7"
+             transform="matrix(1.0854578,0,0,1.0854578,-11.128049,-26.095798)">
+            <rect
+               style="fill:#ffffff;fill-opacity:1;stroke:#636363;stroke-width:2.84069;stroke-dasharray:none;stroke-opacity:1"
+               id="rect1"
+               width="53.036751"
+               height="53.036751"
+               x="79.507324"
+               y="198.90799"
+               ry="5.6931057" />
+            <text
+               xml:space="preserve"
+               style="font-size:4.02959px;line-height:1.25;font-family:sans-serif;stroke-width:3.02221"
+               x="91.080986"
+               y="208.33876"
+               id="text1"><tspan
+                 sodipodi:role="line"
+                 id="tspan1"
+                 x="91.080986"
+                 y="208.33876"
+                 style="font-size:4.02959px;stroke-width:3.02221">HIER WOHNTE</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-size:6.0444px;line-height:1.25;font-family:sans-serif;stroke-width:3.02221"
+               x="88.770515"
+               y="215.88083"
+               id="text3"><tspan
+                 sodipodi:role="line"
+                 id="tspan2"
+                 x="88.770515"
+                 y="215.88083"
+                 style="font-size:6.0444px;stroke-width:3.02221">ELISABETH</tspan><tspan
+                 sodipodi:role="line"
+                 x="88.770515"
+                 y="223.43633"
+                 id="tspan3"
+                 style="font-size:6.0444px;stroke-width:3.02221">BANDHOLZ</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-size:4.02959px;line-height:1.25;font-family:sans-serif;stroke-width:3.02221"
+               x="95.282692"
+               y="229.85716"
+               id="text4"><tspan
+                 sodipodi:role="line"
+                 id="tspan4"
+                 x="95.282692"
+                 y="229.85716"
+                 style="stroke-width:3.02221">GEB. 1919</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-size:4.02959px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:3.02221"
+               x="106.03062"
+               y="236.36879"
+               id="text7"><tspan
+                 sodipodi:role="line"
+                 id="tspan5"
+                 x="106.03062"
+                 y="236.36879"
+                 style="stroke-width:3.02221">VERHAFTET UND</tspan><tspan
+                 sodipodi:role="line"
+                 x="106.03062"
+                 y="241.40578"
+                 id="tspan6"
+                 style="text-align:center;text-anchor:middle;stroke-width:3.02221">DEPORTIERT</tspan><tspan
+                 sodipodi:role="line"
+                 x="106.03062"
+                 y="246.44276"
+                 id="tspan7"
+                 style="stroke-width:3.02221">17.05.1940</tspan></text>
+          </g>
+        </g>
+        <rect
+           style="fill:#d69f36;fill-opacity:1;stroke:#8a6421;stroke-width:2.28557;stroke-opacity:1"
+           id="rect31"
+           width="65.346214"
+           height="69.318626"
+           x="201.66797"
+           y="178.5789"
+           ry="5.3627591" />
+        <text
+           xml:space="preserve"
+           style="font-size:5.03936px;line-height:1.25;font-family:sans-serif;stroke-width:3.77953"
+           x="215.6514"
+           y="188.41232"
+           id="text31"><tspan
+             sodipodi:role="line"
+             style="stroke-width:3.77953"
+             x="215.6514"
+             y="188.41232"
+             id="tspan31">HIER WOHNTE</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:7.55906px;line-height:1.25;font-family:sans-serif;stroke-width:3.77953"
+           x="212.76195"
+           y="199.5351"
+           id="text33"><tspan
+             sodipodi:role="line"
+             id="tspan32"
+             style="font-size:7.55906px;stroke-width:3.77953"
+             x="212.76195"
+             y="199.5351">ELISABETH</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:7.55906px;stroke-width:3.77953"
+             x="212.76195"
+             y="208.98392"
+             id="tspan33">BANDHOLZ</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:5.03937px;line-height:1.25;font-family:sans-serif;stroke-width:3.77953"
+           x="221.10466"
+           y="217.21234"
+           id="text34"><tspan
+             sodipodi:role="line"
+             style="font-size:5.03937px;stroke-width:3.77953"
+             x="221.10466"
+             y="217.21234"
+             id="tspan34">GEB. 1919</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:5.03936px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:3.77953"
+           x="234.79581"
+           y="225.32756"
+           id="text37"><tspan
+             sodipodi:role="line"
+             id="tspan35"
+             style="text-align:center;text-anchor:middle;stroke-width:3.77953"
+             x="234.79581"
+             y="225.32756">VERHAFTET UND</tspan><tspan
+             sodipodi:role="line"
+             style="text-align:center;text-anchor:middle;stroke-width:3.77953"
+             x="234.79581"
+             y="231.62675"
+             id="tspan36">DEPORTIERT</tspan><tspan
+             sodipodi:role="line"
+             style="text-align:center;text-anchor:middle;stroke-width:3.77953"
+             x="234.79581"
+             y="237.92596"
+             id="tspan37">17.05.1940</tspan></text>
+        <path
+           d="m 360.29407,327.00832 h -73.6571 c -3.874,0 -7.01495,3.14095 -7.01495,7.01496 v 67.02831 c 0,1.98875 23.52159,3.88366 24.99911,5.21387 l 14.15139,33.1457 c 1.33459,1.20043 3.0138,1.82827 4.69301,1.82827 1.6792,0 3.35841,-0.62784 4.69301,-1.82827 l 14.15137,-33.1457 c 1.47841,-1.33021 24.99913,-3.22512 24.99913,-5.21387 v -67.02831 c 0,-3.87401 -3.14095,-7.01496 -7.01497,-7.01496 z"
+           id="path1-0-0"
+           style="fill:#e3e3e3;fill-opacity:1;stroke:#5c5c5c;stroke-width:2.85697;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter41-9)"
+           sodipodi:nodetypes="ssssccsccsss" />
+        <g
+           id="g41-3"
+           style="filter:url(#filter164)"
+           transform="translate(214.4381,143.04002)">
+          <rect
+             style="fill:#d69f36;fill-opacity:1;stroke:none;stroke-width:3.05174;stroke-dasharray:none;stroke-opacity:1"
+             id="rect17"
+             width="56.977081"
+             height="56.977081"
+             x="82.038887"
+             y="196.42139"
+             ry="9.6549177" />
+          <text
+             xml:space="preserve"
+             style="font-size:4.32897px;line-height:1.25;font-family:sans-serif;stroke-width:3.24675"
+             x="94.472404"
+             y="206.55281"
+             id="text18"><tspan
+               sodipodi:role="line"
+               id="tspan18"
+               x="94.472404"
+               y="206.55281"
+               style="font-size:4.32897px;stroke-width:3.24675">HIER WOHNTE</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:6.49346px;line-height:1.25;font-family:sans-serif;stroke-width:3.24675"
+             x="91.990311"
+             y="214.6552"
+             id="text20"><tspan
+               sodipodi:role="line"
+               id="tspan19"
+               x="91.990311"
+               y="214.6552"
+               style="font-size:6.49346px;stroke-width:3.24675">ELISABETH</tspan><tspan
+               sodipodi:role="line"
+               x="91.990311"
+               y="222.77202"
+               id="tspan20"
+               style="font-size:6.49346px;stroke-width:3.24675">BANDHOLZ</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:4.32897px;line-height:1.25;font-family:sans-serif;stroke-width:3.24675"
+             x="98.986328"
+             y="229.66991"
+             id="text28"><tspan
+               sodipodi:role="line"
+               id="tspan28"
+               x="98.986328"
+               y="229.66991"
+               style="stroke-width:3.24675">GEB. 1919</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:4.32897px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:3.24675"
+             x="110.62678"
+             y="236.66531"
+             id="text31-9"><tspan
+               sodipodi:role="line"
+               id="tspan29"
+               x="110.62678"
+               y="236.66531"
+               style="stroke-width:3.24675">VERHAFTET UND</tspan><tspan
+               sodipodi:role="line"
+               x="110.62678"
+               y="242.07652"
+               id="tspan30"
+               style="text-align:center;text-anchor:middle;stroke-width:3.24675">DEPORTIERT</tspan><tspan
+               sodipodi:role="line"
+               x="110.62678"
+               y="247.48773"
+               id="tspan31-9"
+               style="stroke-width:3.24675">17.05.1940</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
