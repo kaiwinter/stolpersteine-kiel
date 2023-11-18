@@ -3,10 +3,6 @@
     android:versionCode="31"
     android:versionName="1.8.1-SNAPSHOT" >
 
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -42,7 +38,14 @@
                 android:value="de.vrlfr.stolpersteine.activity.StolpersteinActivity" />
         </activity>
         <activity
-            android:name="de.vrlfr.stolpersteine.activity.FullscreenPDFActivity"
+            android:name="de.vrlfr.stolpersteine.activity.FullscreenPdfActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.vrlfr.stolpersteine.activity.StolpersteinActivity" />
+        </activity>
+        <activity
+            android:name="de.vrlfr.stolpersteine.activity.FullscreenTxtActivity"
             android:configChanges="screenSize|orientation|keyboardHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -50,7 +53,7 @@
         </activity>
 
         <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
+            android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
     </application>
 

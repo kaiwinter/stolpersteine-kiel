@@ -23,6 +23,7 @@ import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.database.Stolperstein;
 import de.vrlfr.stolpersteine.fragment.about.AboutFragment;
 import de.vrlfr.stolpersteine.fragment.list.ListFragment;
+import de.vrlfr.stolpersteine.fragment.map.MapFragment;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -83,7 +84,7 @@ public class MainActivity extends BaseActivity {
 
 		if (position == 0) {
 			if (mapFragment == null) {
-				mapFragment = de.vrlfr.stolpersteine.fragment.map.MapFragment.newInstance(stolpersteine);
+				mapFragment = MapFragment.newInstance(stolpersteine);
 			}
 			ft.replace(R.id.content_frame, mapFragment);
 		} else if (position == 1) {
@@ -100,7 +101,7 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void addDrawerItems() {
-		String[] entries = { "Karte", "Personenregister", "Über" };
+		String[] entries = { "Karte", "Personenregister", "Informationen" };
 		Integer[] imageId = { R.drawable.ic_map, R.drawable.ic_persons, R.drawable.ic_information };
 		drawerListAdapter = new NavigationDrawerAdapter(MainActivity.this, entries, imageId) {
 			@Override

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Stolpersteine Kiel</string>
-    <string name="menu_ueber">Info</string>
     <string name="marker_das_bild_des_stolpersteins">Das Bild des Stolpersteins</string>
     <string name="image_verlegt_am">"Verlegt am "</string>
     <string name="drawer_close">Menüleiste schließen</string>
     <string name="drawer_open">Menüleiste öffnen</string>
     <string name="software_lizenzen">Open Source-Lizenzen</string>
+    <string name="was_sind_stolpersteine">Die Stolpersteine sind ein Projekt des Kölner Künstlers Gunter Demnig (*1947). Es soll die Erinnerung an die Opfer des Nationalsozialismus – jüdische Bürger, Sinti und Roma, politisch Verfolgte, Homosexuelle, Zeugen Jehovas und „Euthanasie“-Opfer – lebendig erhalten. Jeder Stolperstein ist einem Menschen gewidmet, der während der Zeit des Nationalsozialismus ermordet wurde. Auf den etwa 10 x 10 Zentimeter großen Stolpersteinen sind kleine Messingplatten mit den Namen und Lebensdaten der Opfer angebracht. Sie werden vor dem letzten frei gewählten Wohnort in das Pflas- ter des Gehweges eingelassen. Inzwischen liegen in über 500 Städten in Deutschland und mehreren Ländern Europas über 27.000 Steine. Auch in Kiel werden seit 2006 jährlich neue Stolpersteine verlegt.</string>
 </resources>

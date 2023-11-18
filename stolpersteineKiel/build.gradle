@@ -30,6 +30,18 @@ android {
 
 }
 
+task cleanupRealm(type: Delete) {
+    delete project.projectDir.path + "/src/main/assets/stolperstein.realm.management"
+    delete project.projectDir.path + "/src/main/assets/stolperstein.realm.lock"
+    delete project.projectDir.path + "/src/main/assets/stolperstein.realm.note"
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == "preDebugBuild" || task.name == "preReleaseBuild") {
+        task.dependsOn cleanupRealm
+    }
+}
+
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
@@ -42,5 +54,7 @@ dependencies {
     implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.3'
     implementation 'com.github.MikeOrtiz:TouchImageView:3.2.1'
 
+    implementation "io.noties.markwon:core:4.6.2"
+    implementation "io.noties.markwon:image:4.6.2"
     implementation 'com.google.android.material:material:1.10.0'
 }

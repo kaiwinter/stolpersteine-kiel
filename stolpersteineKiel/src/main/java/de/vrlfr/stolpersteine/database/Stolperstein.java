@@ -68,4 +68,12 @@ public class Stolperstein extends RealmObject implements Parcelable {
 	public String toString() {
 		return name;
 	}
+
+	public static String getImageAssetName(int bioId) {
+		return "id" + bioId + ".pdf";
+	}
+
+	public static String getBioTxtAssetName(int bioId) {
+		return "id" + bioId + ".md";
+	}
 }

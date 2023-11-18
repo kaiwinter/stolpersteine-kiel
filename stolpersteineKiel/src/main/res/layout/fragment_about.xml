@@ -17,25 +17,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
-            android:text="Legende"
+            android:text="Was sind Stolpersteine"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:drawablePadding="10dp"
-            android:drawableStart="@drawable/stolperstein"
-            android:gravity="center_vertical"
-            android:paddingEnd="10dp"
-            android:paddingStart="0dp"
-            android:paddingTop="10dp"
-            android:text="Ein Stolperstein"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="@string/was_sind_stolpersteine"
+            android:hyphenationFrequency="normal"
             android:textAppearance="?android:attr/textAppearance" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:paddingTop="15dp"
             android:text="Copyright"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -44,20 +40,8 @@
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:text="Mit Genehmigung der Stadt Kiel enthält diese App die Daten der Kieler Stolpersteine. Quelle der Daten und Fotos ist die offizielle Website der Stolpersteine in Kiel. Weitere Quellen sind jeweils in den Biografien angegeben."
+            android:hyphenationFrequency="normal"
             android:textAppearance="?android:attr/textAppearance" />
-
-        <Button
-            android:id="@+id/librariesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/software_lizenzen" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:text="Webseite der Stadt Kiel"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,10 +53,16 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:paddingVertical="10dp"
             android:text="Dies ist keine offizielle App der Stadt Kiel."
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/librariesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/software_lizenzen" />
 
     </LinearLayout>
 

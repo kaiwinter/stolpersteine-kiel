@@ -17,7 +17,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -72,7 +74,7 @@ public class StolpersteinActivity extends BaseActivity {
         }
 
         Stolperstein stolperstein = parcelableArrayList.iterator().next();
-        final String adresse = stolperstein.adresse;
+        String adresse = stolperstein.adresse;
         getSupportActionBar().setTitle(adresse);
 
         LinearLayout stolpersteinListView = findViewById(R.id.listViewFix);

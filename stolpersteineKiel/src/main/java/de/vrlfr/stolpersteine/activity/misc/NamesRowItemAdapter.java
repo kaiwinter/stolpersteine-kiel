@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -20,7 +22,8 @@ import java.util.List;
 
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.FullscreenImageActivity;
-import de.vrlfr.stolpersteine.activity.FullscreenPDFActivity;
+import de.vrlfr.stolpersteine.activity.FullscreenPdfActivity;
+import de.vrlfr.stolpersteine.activity.FullscreenTxtActivity;
 import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public final class NamesRowItemAdapter extends ArrayAdapter<String> {
@@ -34,8 +37,9 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         this.stolpersteineList = new ArrayList<>(stolpersteine);
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
         MotionRowViewHolder viewHolder;
 
@@ -80,12 +84,19 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
             });
         }
 
-        Button biografieImageViewPdf = convertView.findViewById(R.id.biografieButton);
+        Button biografieButtonPdf = convertView.findViewById(R.id.biografieButtonPdf);
+        Button biografieImageViewTxt = convertView.findViewById(R.id.biografieButtonTxt);
         if (stolperstein.bioId == -1) {
-            biografieImageViewPdf.setVisibility(View.GONE);
+            biografieButtonPdf.setVisibility(View.GONE);
+            biografieImageViewTxt.setVisibility(View.GONE);
         } else {
-            biografieImageViewPdf.setOnClickListener(v -> {
-                Intent intent = FullscreenPDFActivity.newIntent(v.getContext(), stolperstein.bioId);
+            biografieButtonPdf.setOnClickListener(v -> {
+                Intent intent = FullscreenPdfActivity.newIntent(v.getContext(), stolperstein.bioId);
+                NamesRowItemAdapter.this.getContext().startActivity(intent);
+            });
+
+            biografieImageViewTxt.setOnClickListener(v -> {
+                Intent intent = FullscreenTxtActivity.newIntent(v.getContext(), stolperstein.bioId);
                 NamesRowItemAdapter.this.getContext().startActivity(intent);
             });
         }
