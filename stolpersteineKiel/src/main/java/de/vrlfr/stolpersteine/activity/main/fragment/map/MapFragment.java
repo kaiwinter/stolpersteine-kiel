@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +25,11 @@ import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -34,6 +38,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.stolperstein.StolpersteinActivity;
@@ -110,7 +116,41 @@ public class MapFragment extends Fragment {
     private void initMarkers(GoogleMap map) {
         Map<String, ArrayList<Stolperstein>> adresse2Stolpersteine = sortStolpersteineByAdresse(stolpersteine);
         addMapListeners(map, adresse2Stolpersteine);
-        new AddMarkerToMapAsync(getActivity(), map).execute(adresse2Stolpersteine);
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executor.execute(() -> {
+            handler.post(() -> {
+            for (Map.Entry<String, ArrayList<Stolperstein>> adresse2Stolperstein : adresse2Stolpersteine.entrySet()) {
+                StringBuilder namen = new StringBuilder();
+                String adresse = null;
+                LatLng latLon = null;
+                for (Stolperstein stolperstein : adresse2Stolperstein.getValue()) {
+                    if (adresse == null) {
+                        adresse = stolperstein.adresse;
+                        latLon = new LatLng(stolperstein.latitude, stolperstein.longitude);
+                    }
+                    if (namen.length() > 0) {
+                        namen.append("\n");
+                    }
+                    namen.append(stolperstein.name);
+                }
+
+                final MarkerOptions marker = new MarkerOptions() //
+                        .position(latLon) //
+                        .title(adresse) //
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.stolperstein)) //
+                        .snippet(namen.toString());
+                Activity activity = MapFragment.this.getActivity();
+                if (activity != null) {
+                    activity.runOnUiThread(() -> {
+                        // Muss im UI Thread ausgeführt werden
+                        map.addMarker(marker);
+                    });
+                }
+            }
+            });
+        });
     }
 
     private void addMapListeners(final GoogleMap map, final Map<String, ArrayList<Stolperstein>> adresse2Stolpersteine) {
