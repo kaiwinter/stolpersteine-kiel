@@ -1,7 +1,8 @@
 package de.vrlfr.stolpersteine.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class BaseActivity extends AppCompatActivity {
 

@@ -17,39 +17,39 @@ import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public class AddMarkerToMapAsync extends
-		AsyncTask<Map<String, ArrayList<Stolperstein>>, ArrayList<Stolperstein>, Boolean> {
-	private final WeakReference<Activity> context;
-	private final GoogleMap map;
+        AsyncTask<Map<String, ArrayList<Stolperstein>>, ArrayList<Stolperstein>, Boolean> {
+    private final WeakReference<Activity> context;
+    private final GoogleMap map;
 
-	public AddMarkerToMapAsync(Activity activity, GoogleMap map) {
-		this.context = new WeakReference<>(activity);
-		this.map = map;
-	}
+    public AddMarkerToMapAsync(Activity activity, GoogleMap map) {
+        this.context = new WeakReference<>(activity);
+        this.map = map;
+    }
 
-	@Override
-	protected Boolean doInBackground(Map<String, ArrayList<Stolperstein>>... adresse2Stolpersteine) {
-		// Fügt alle Stolpersteine zur GoogleMap hinzu.
-		for (Entry<String, ArrayList<Stolperstein>> adresse2Stolperstein : adresse2Stolpersteine[0].entrySet()) {
-			publishProgress(adresse2Stolperstein.getValue());
-		}
-		return true;
-	}
+    @Override
+    protected Boolean doInBackground(Map<String, ArrayList<Stolperstein>>... adresse2Stolpersteine) {
+        // Fügt alle Stolpersteine zur GoogleMap hinzu.
+        for (Entry<String, ArrayList<Stolperstein>> adresse2Stolperstein : adresse2Stolpersteine[0].entrySet()) {
+            publishProgress(adresse2Stolperstein.getValue());
+        }
+        return true;
+    }
 
-	@Override
-	protected void onProgressUpdate(ArrayList<Stolperstein>... stolpersteine) {
-		String namen = "";
-		String adresse = null;
-		LatLng latLon = null;
-		for (Stolperstein stolperstein : stolpersteine[0]) {
-			if (adresse == null) {
-				adresse = stolperstein.adresse;
-				latLon = new LatLng(stolperstein.latitude, stolperstein.longitude);
-			}
-			if (!namen.isEmpty()) {
-				namen += "\n";
-			}
-			namen += stolperstein.name;
-		}
+    @Override
+    protected void onProgressUpdate(ArrayList<Stolperstein>... stolpersteine) {
+        String namen = "";
+        String adresse = null;
+        LatLng latLon = null;
+        for (Stolperstein stolperstein : stolpersteine[0]) {
+            if (adresse == null) {
+                adresse = stolperstein.adresse;
+                latLon = new LatLng(stolperstein.latitude, stolperstein.longitude);
+            }
+            if (!namen.isEmpty()) {
+                namen += "\n";
+            }
+            namen += stolperstein.name;
+        }
 
 		final MarkerOptions marker = new MarkerOptions() //
 				.position(latLon) //
