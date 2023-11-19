@@ -121,34 +121,34 @@ public class MapFragment extends Fragment {
         Handler handler = new Handler(Looper.getMainLooper());
         executor.execute(() -> {
             handler.post(() -> {
-            for (Map.Entry<String, ArrayList<Stolperstein>> adresse2Stolperstein : adresse2Stolpersteine.entrySet()) {
-                StringBuilder namen = new StringBuilder();
-                String adresse = null;
-                LatLng latLon = null;
-                for (Stolperstein stolperstein : adresse2Stolperstein.getValue()) {
-                    if (adresse == null) {
-                        adresse = stolperstein.adresse;
-                        latLon = new LatLng(stolperstein.latitude, stolperstein.longitude);
+                for (Map.Entry<String, ArrayList<Stolperstein>> adresse2Stolperstein : adresse2Stolpersteine.entrySet()) {
+                    StringBuilder namen = new StringBuilder();
+                    String adresse = null;
+                    LatLng latLon = null;
+                    for (Stolperstein stolperstein : adresse2Stolperstein.getValue()) {
+                        if (adresse == null) {
+                            adresse = stolperstein.adresse;
+                            latLon = new LatLng(stolperstein.latitude, stolperstein.longitude);
+                        }
+                        if (namen.length() > 0) {
+                            namen.append("\n");
+                        }
+                        namen.append(stolperstein.name);
                     }
-                    if (namen.length() > 0) {
-                        namen.append("\n");
-                    }
-                    namen.append(stolperstein.name);
-                }
 
-                final MarkerOptions marker = new MarkerOptions() //
-                        .position(latLon) //
-                        .title(adresse) //
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.stolperstein)) //
-                        .snippet(namen.toString());
-                Activity activity = MapFragment.this.getActivity();
-                if (activity != null) {
-                    activity.runOnUiThread(() -> {
-                        // Muss im UI Thread ausgeführt werden
-                        map.addMarker(marker);
-                    });
+                    final MarkerOptions marker = new MarkerOptions() //
+                            .position(latLon) //
+                            .title(adresse) //
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.stolperstein)) //
+                            .snippet(namen.toString());
+                    Activity activity = MapFragment.this.getActivity();
+                    if (activity != null) {
+                        activity.runOnUiThread(() -> {
+                            // Muss im UI Thread ausgeführt werden
+                            map.addMarker(marker);
+                        });
+                    }
                 }
-            }
             });
         });
     }
