@@ -14,7 +14,7 @@
         android:theme="@style/AppBaseTheme" >
 
         <activity
-            android:name="de.vrlfr.stolpersteine.activity.MainActivity"
+            android:name="de.vrlfr.stolpersteine.activity.main.MainActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:exported="true">
             <intent-filter>
@@ -24,32 +24,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="de.vrlfr.stolpersteine.activity.StolpersteinActivity"
+            android:name="de.vrlfr.stolpersteine.activity.stolperstein.StolpersteinActivity"
             android:configChanges="screenSize|orientation|keyboardHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.vrlfr.stolpersteine.activity.MainActivity" />
+                android:value="de.vrlfr.stolpersteine.activity.main.MainActivity" />
         </activity>
         <activity
-            android:name="de.vrlfr.stolpersteine.activity.FullscreenImageActivity"
+            android:name="de.vrlfr.stolpersteine.activity.stolperstein.FullscreenImageActivity"
             android:configChanges="screenSize|orientation|keyboardHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.vrlfr.stolpersteine.activity.StolpersteinActivity" />
+                android:value="de.vrlfr.stolpersteine.activity.stolperstein.StolpersteinActivity" />
         </activity>
         <activity
-            android:name="de.vrlfr.stolpersteine.activity.FullscreenPdfActivity"
+            android:name="de.vrlfr.stolpersteine.activity.stolperstein.FullscreenPdfActivity"
             android:configChanges="screenSize|orientation|keyboardHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.vrlfr.stolpersteine.activity.StolpersteinActivity" />
+                android:value="de.vrlfr.stolpersteine.activity.stolperstein.StolpersteinActivity" />
         </activity>
         <activity
-            android:name="de.vrlfr.stolpersteine.activity.FullscreenTxtActivity"
+            android:name="de.vrlfr.stolpersteine.activity.stolperstein.FullscreenTxtActivity"
             android:configChanges="screenSize|orientation|keyboardHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.vrlfr.stolpersteine.activity.StolpersteinActivity" />
+                android:value="de.vrlfr.stolpersteine.activity.stolperstein.StolpersteinActivity" />
         </activity>
 
         <meta-data

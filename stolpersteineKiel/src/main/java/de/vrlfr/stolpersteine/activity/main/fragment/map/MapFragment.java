@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.fragment.map;
+package de.vrlfr.stolpersteine.activity.main.fragment.map;
 
 import android.Manifest;
 import android.app.Activity;
@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.vrlfr.stolpersteine.R;
-import de.vrlfr.stolpersteine.activity.StolpersteinActivity;
+import de.vrlfr.stolpersteine.activity.stolperstein.StolpersteinActivity;
 import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public class MapFragment extends Fragment {

@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.fragment.list;
+package de.vrlfr.stolpersteine.activity.main.fragment.list;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import de.vrlfr.stolpersteine.R;
-import de.vrlfr.stolpersteine.activity.StolpersteinActivity;
+import de.vrlfr.stolpersteine.activity.stolperstein.StolpersteinActivity;
 import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public class ListFragment extends Fragment implements OnQueryTextListener {

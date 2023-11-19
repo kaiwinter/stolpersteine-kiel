@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.activity;
+package de.vrlfr.stolpersteine.activity.main;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -20,10 +20,11 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import de.vrlfr.stolpersteine.R;
+import de.vrlfr.stolpersteine.activity.BaseActivity;
 import de.vrlfr.stolpersteine.database.Stolperstein;
-import de.vrlfr.stolpersteine.fragment.about.AboutFragment;
-import de.vrlfr.stolpersteine.fragment.list.ListFragment;
-import de.vrlfr.stolpersteine.fragment.map.MapFragment;
+import de.vrlfr.stolpersteine.activity.main.fragment.about.AboutFragment;
+import de.vrlfr.stolpersteine.activity.main.fragment.list.ListFragment;
+import de.vrlfr.stolpersteine.activity.main.fragment.map.MapFragment;
 import io.realm.Realm;
 import io.realm.RealmResults;
 

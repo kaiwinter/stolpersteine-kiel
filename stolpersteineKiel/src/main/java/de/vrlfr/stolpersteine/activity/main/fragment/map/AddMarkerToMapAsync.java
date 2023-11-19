@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.fragment.map;
+package de.vrlfr.stolpersteine.activity.main.fragment.map;
 
 import android.app.Activity;
 import android.os.AsyncTask;

@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.activity;
+package de.vrlfr.stolpersteine.activity.stolperstein;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import com.ortiz.touchview.TouchImageView;
 import com.squareup.picasso.Picasso;
 
 import de.vrlfr.stolpersteine.R;
+import de.vrlfr.stolpersteine.activity.BaseActivity;
 
 /**
  * Anzeigen eines Stolperstein Bildes als Vollbild.

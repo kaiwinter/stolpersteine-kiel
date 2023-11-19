@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.activity.misc;
+package de.vrlfr.stolpersteine.activity.stolperstein;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,9 +21,6 @@ import java.util.Collection;
 import java.util.List;
 
 import de.vrlfr.stolpersteine.R;
-import de.vrlfr.stolpersteine.activity.FullscreenImageActivity;
-import de.vrlfr.stolpersteine.activity.FullscreenPdfActivity;
-import de.vrlfr.stolpersteine.activity.FullscreenTxtActivity;
 import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public final class NamesRowItemAdapter extends ArrayAdapter<String> {

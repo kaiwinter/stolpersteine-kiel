@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.activity;
+package de.vrlfr.stolpersteine.activity.stolperstein;
 
 import android.Manifest;
 import android.content.Context;
@@ -17,17 +17,14 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import de.vrlfr.stolpersteine.R;
-import de.vrlfr.stolpersteine.activity.misc.ImageBioId;
-import de.vrlfr.stolpersteine.activity.misc.NamesRowItemAdapter;
+import de.vrlfr.stolpersteine.activity.BaseActivity;
 import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public class StolpersteinActivity extends BaseActivity {

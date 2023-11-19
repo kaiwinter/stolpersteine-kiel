@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.activity.misc;
+package de.vrlfr.stolpersteine.activity.stolperstein;
 
 /**
  * Value Objekt, das für die Gruppierung der Stolpersteine nach Bild ID und Biografie ID dient.

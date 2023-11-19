@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.activity;
+package de.vrlfr.stolpersteine.activity.main;
 
 import android.app.Activity;
 import android.content.Context;

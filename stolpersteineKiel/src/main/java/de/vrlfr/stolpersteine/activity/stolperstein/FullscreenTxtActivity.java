@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.activity;
+package de.vrlfr.stolpersteine.activity.stolperstein;
 
 import static android.content.res.AssetManager.ACCESS_BUFFER;
 
@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import de.vrlfr.stolpersteine.R;
+import de.vrlfr.stolpersteine.activity.BaseActivity;
 import de.vrlfr.stolpersteine.database.Stolperstein;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;

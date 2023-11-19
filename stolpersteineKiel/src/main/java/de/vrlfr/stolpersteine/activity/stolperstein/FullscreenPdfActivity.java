@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.activity;
+package de.vrlfr.stolpersteine.activity.stolperstein;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.github.barteksc.pdfviewer.PDFView;
 
 import de.vrlfr.stolpersteine.R;
+import de.vrlfr.stolpersteine.activity.BaseActivity;
 import de.vrlfr.stolpersteine.database.Stolperstein;
 
 /**

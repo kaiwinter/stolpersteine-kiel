@@ -1,4 +1,4 @@
-package de.vrlfr.stolpersteine.fragment.list;
+package de.vrlfr.stolpersteine.activity.main.fragment.list;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
