@@ -53,7 +53,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'de.psdev.licensesdialog:licensesdialog:2.2.0'
     implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.3'
-    implementation 'com.github.MikeOrtiz:TouchImageView:3.2.1'
+    implementation 'com.github.MikeOrtiz:TouchImageView:3.6'
 
     implementation "io.noties.markwon:core:4.6.2"
     implementation "io.noties.markwon:image:4.6.2"
