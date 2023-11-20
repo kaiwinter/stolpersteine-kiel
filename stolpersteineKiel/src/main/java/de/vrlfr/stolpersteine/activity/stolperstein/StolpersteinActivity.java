@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -101,6 +101,6 @@ public class StolpersteinActivity extends BaseActivity {
 
             googleMap.addMarker(marker);
         };
-        ((MapFragment) getFragmentManager().findFragmentById(R.id.staticmap)).getMapAsync(onMapReady);
+        ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.staticmap)).getMapAsync(onMapReady);
     }
 }

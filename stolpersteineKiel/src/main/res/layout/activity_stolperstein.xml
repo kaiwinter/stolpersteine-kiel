@@ -15,7 +15,7 @@
             android:id="@+id/staticmap"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            class="com.google.android.gms.maps.MapFragment" />
+            class="com.google.android.gms.maps.SupportMapFragment" />
 
         <LinearLayout
             android:id="@+id/listViewFix"

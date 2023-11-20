@@ -78,7 +78,7 @@ public class MapFragment extends Fragment {
             view = inflater.inflate(R.layout.fragment_map, container, false);
 
             SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-            FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
+            FragmentTransaction beginTransaction = getParentFragmentManager().beginTransaction();
             beginTransaction.replace(R.id.map_container, mapFragment);
             beginTransaction.commit();
             mapFragment.getMapAsync(map -> {
