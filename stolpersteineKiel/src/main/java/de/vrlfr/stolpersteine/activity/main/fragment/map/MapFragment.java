@@ -1,6 +1,7 @@
 package de.vrlfr.stolpersteine.activity.main.fragment.map;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,7 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -46,12 +48,20 @@ import de.vrlfr.stolpersteine.activity.stolperstein.StolpersteinActivity;
 import de.vrlfr.stolpersteine.database.Stolperstein;
 
 public class MapFragment extends Fragment {
-    private static final int REQUEST_LOCATION_PERMISSIONS = 1;
     private static final String STOLPERSTEINE_EXTRA = "de.vrlfr.stolpersteine.StolpersteinList";
     private static final LatLng KIEL = new LatLng(54.323396, 10.120184);
     private List<Stolperstein> stolpersteine;
     private View view;
     private GoogleMap map;
+
+    @SuppressLint("MissingPermission")
+    private final ActivityResultLauncher<String[]> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), isGranted -> {
+                if (Boolean.TRUE.equals(isGranted.get(Manifest.permission.ACCESS_FINE_LOCATION))
+                        && Boolean.TRUE.equals(isGranted.get(Manifest.permission.ACCESS_COARSE_LOCATION))) {
+                    map.setMyLocationEnabled(true);
+                }
+            });
 
     public static MapFragment newInstance(ArrayList<Stolperstein> stolpersteine) {
         MapFragment fragment = new MapFragment();
@@ -85,7 +95,7 @@ public class MapFragment extends Fragment {
                 MapFragment.this.map = map;
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                         && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_LOCATION_PERMISSIONS);
+                    requestPermissionLauncher.launch(new String[]{ Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION });
                 } else {
                     map.setMyLocationEnabled(true);
                 }
@@ -98,19 +108,6 @@ public class MapFragment extends Fragment {
             });
         }
         return view;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_LOCATION_PERMISSIONS) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                        && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                map.setMyLocationEnabled(true);
-            }
-        }
     }
 
     private void initMarkers(GoogleMap map) {
