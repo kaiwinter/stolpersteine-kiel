@@ -38,13 +38,6 @@
                 android:value="de.vrlfr.stolpersteine.activity.stolperstein.StolpersteinActivity" />
         </activity>
         <activity
-            android:name="de.vrlfr.stolpersteine.activity.stolperstein.FullscreenPdfActivity"
-            android:configChanges="screenSize|orientation|keyboardHidden" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.vrlfr.stolpersteine.activity.stolperstein.StolpersteinActivity" />
-        </activity>
-        <activity
             android:name="de.vrlfr.stolpersteine.activity.stolperstein.FullscreenTxtActivity"
             android:configChanges="screenSize|orientation|keyboardHidden" >
             <meta-data

@@ -53,21 +53,6 @@ public class ResourcesTest {
         Assert.assertEquals("Es fehlen Texte", 0, textsMissing);
     }
 
-    @Test
-    public void pdfsExist() {
-        int pdfsMissing = 0;
-        for (Stolperstein stolperstein: getStolpersteine()) {
-            try {
-                String path = "bio/" + Stolperstein.getImageAssetName(stolperstein.bioId);
-                InputStream inputStream = Realm.getApplicationContext().getAssets().open(path);
-            } catch (IOException e) {
-                pdfsMissing++;
-                Log.e("TEST", "PDF mit der ID " + stolperstein.bioId + " fehlt");
-            }
-        }
-        Assert.assertEquals("Es fehlen PDFs", 0, pdfsMissing);
-    }
-
     private List<Stolperstein> getStolpersteine() {
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
                 .assetFile("stolperstein.realm")

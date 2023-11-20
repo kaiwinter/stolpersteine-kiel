@@ -80,17 +80,10 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
             });
         }
 
-        Button biografieButtonPdf = convertView.findViewById(R.id.biografieButtonPdf);
         Button biografieImageViewTxt = convertView.findViewById(R.id.biografieButtonTxt);
         if (stolperstein.bioId == -1) {
-            biografieButtonPdf.setVisibility(View.GONE);
             biografieImageViewTxt.setVisibility(View.GONE);
         } else {
-            biografieButtonPdf.setOnClickListener(v -> {
-                Intent intent = FullscreenPdfActivity.newIntent(v.getContext(), stolperstein.bioId);
-                NamesRowItemAdapter.this.getContext().startActivity(intent);
-            });
-
             biografieImageViewTxt.setOnClickListener(v -> {
                 Intent intent = FullscreenTxtActivity.newIntent(v.getContext(), stolperstein.bioId);
                 NamesRowItemAdapter.this.getContext().startActivity(intent);

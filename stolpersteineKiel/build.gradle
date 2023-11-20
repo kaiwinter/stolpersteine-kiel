@@ -27,7 +27,7 @@ android {
     }
     namespace 'de.vrlfr.stolpersteine'
     androidResources {
-        noCompress '.pdf', '.realm'
+        noCompress '.realm'
     }
 }
 
