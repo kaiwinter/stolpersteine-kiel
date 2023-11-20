@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -71,6 +72,22 @@ public class MainActivity extends BaseActivity {
             drawerList.setItemChecked(0, true);
             selectItem(0);
         }
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Wenn in anderen als dem Karten-Fragment zurück navigiert wird, erst zur Karte springen, bevor die App
+                // geschlossen wird.
+                if (drawerLayout.isDrawerOpen(drawerLinearLayout)) {
+                    drawerLayout.closeDrawer(drawerLinearLayout);
+                } else if (drawerList.getCheckedItemPosition() != 0) {
+                    drawerList.setItemChecked(0, true);
+                    selectItem(0);
+                } else {
+                    finish();
+                }
+            }
+        });
     }
 
     private void selectItem(int position) {
@@ -162,21 +179,6 @@ public class MainActivity extends BaseActivity {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
     }
-
-    @Override
-    public void onBackPressed() {
-        // Wenn in anderen als dem Karten-Fragment zurück navigiert wird, erst zur Karte springen, bevor die App
-        // geschlossen wird.
-        if (drawerLayout.isDrawerOpen(drawerLinearLayout)) {
-            drawerLayout.closeDrawer(drawerLinearLayout);
-        } else if (drawerList.getCheckedItemPosition() != 0) {
-            drawerList.setItemChecked(0, true);
-            selectItem(0);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
 
     @Override
     protected void onDestroy() {
