@@ -44,14 +44,10 @@ public class MainActivity extends BaseActivity {
 
     private final AtomicInteger currentlySelectedFragment = new AtomicInteger(-1);
 
-    private Realm realm;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        realm = Realm.getDefaultInstance();
 
         drawerList = findViewById(R.id.navList);
         drawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -64,8 +60,11 @@ public class MainActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+
+        Realm realm = Realm.getDefaultInstance();
         RealmResults<Stolperstein> all = realm.where(Stolperstein.class).findAll();
         stolpersteine = new ArrayList<>(realm.copyFromRealm(all));
+        realm.close();
 
         if (savedInstanceState == null) {
             // Selektion initial programmatisch setzen
@@ -178,17 +177,5 @@ public class MainActivity extends BaseActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (realm != null) {
-            try {
-                realm.close();
-            } catch (IllegalStateException e) {
-                // ignore
-            }
-        }
     }
 }
