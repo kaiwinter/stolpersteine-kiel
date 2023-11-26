@@ -31,3 +31,9 @@
 # This is generated automatically by the Android Gradle plugin.
 -dontwarn org.conscrypt.Conscrypt
 -dontwarn org.conscrypt.OpenSSLProvider
+
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn com.caverock.androidsvg.SVG
+-dontwarn com.caverock.androidsvg.SVGParseException
+-dontwarn pl.droidsonroids.gif.GifDrawable
