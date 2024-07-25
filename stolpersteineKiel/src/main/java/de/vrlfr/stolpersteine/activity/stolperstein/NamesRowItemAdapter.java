@@ -59,7 +59,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         String alleNamenString = "";
         for (Stolperstein stolperstein : stolpersteine) {
 
-            if (alleNamenString.length() > 0) {
+            if (!alleNamenString.isEmpty()) {
                 alleNamenString += "<br/>";
             }
             alleNamenString += "<b>" + stolperstein.name + "</b> " + stolperstein.geboren + " - " + stolperstein.tod;
@@ -103,11 +103,6 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
 
     private static final class MotionRowViewHolder {
         public TextView textViewNamen;
-    }
-
-    @Override
-    public boolean areAllItemsEnabled() {
-        return true;
     }
 
     @Override

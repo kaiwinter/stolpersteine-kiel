@@ -9,11 +9,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/staticmap"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            class="com.google.android.gms.maps.SupportMapFragment" />
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
 
         <LinearLayout
             android:id="@+id/listViewFix"
