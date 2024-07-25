@@ -50,7 +50,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
 
     implementation 'com.github.thebestpol:ParallaxScroll:12665d54d5'
-    implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'de.psdev.licensesdialog:licensesdialog:2.2.0'
     implementation 'com.github.MikeOrtiz:TouchImageView:3.6'
 

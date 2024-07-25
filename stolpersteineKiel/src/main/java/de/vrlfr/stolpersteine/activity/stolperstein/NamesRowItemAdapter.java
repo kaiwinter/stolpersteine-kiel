@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -71,8 +69,7 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
         int imageResource = stolperstein.getResourceIdForImageId(getContext());
 
         if (imageResource > 0) {
-            Picasso.get().load(imageResource).error(android.R.drawable.ic_delete)
-                    .into(stolpersteinBildImageView);
+            stolpersteinBildImageView.setImageResource(imageResource);
             stolpersteinBildImageView.setOnClickListener(v -> {
                 Intent intent = FullscreenImageActivity.newIntent(v.getContext(), imageResource,
                         stolperstein.adresse);

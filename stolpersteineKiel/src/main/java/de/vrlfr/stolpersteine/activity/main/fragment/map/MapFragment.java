@@ -32,8 +32,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -143,7 +141,6 @@ public class MapFragment extends Fragment {
     }
 
     private void addMapListeners(final GoogleMap map, final Map<String, ArrayList<Stolperstein>> adresse2Stolpersteine) {
-        final boolean[] firstTime = {true};
         map.setInfoWindowAdapter(new InfoWindowAdapter() {
             @Override
             public View getInfoContents(Marker marker) {
@@ -160,16 +157,7 @@ public class MapFragment extends Fragment {
                 if (stolperstein.imageId > -1) {
                     int imageResource = stolperstein.getResourceIdForImageId(activity);
                     if (imageResource != 0) {
-                        if (firstTime[0]) {
-                            // if it's the first time, load the image with the callback set
-                            firstTime[0] = false;
-                            Picasso.get().load(imageResource).resize(128, 128).centerCrop()
-                                    .into(imageView, new InfoWindowRefresher(marker));
-                        } else {
-
-                            Picasso.get().load(imageResource).resize(128, 128).centerCrop().into(imageView);
-                            firstTime[0] = true;
-                        }
+                        imageView.setImageResource(imageResource);
                     }
                 } else {
                     imageView.setVisibility(View.GONE);
@@ -235,22 +223,5 @@ public class MapFragment extends Fragment {
         }
 
         return adresse2Stolpersteine;
-    }
-
-    private static class InfoWindowRefresher implements Callback {
-        private final Marker markerToRefresh;
-
-        private InfoWindowRefresher(Marker markerToRefresh) {
-            this.markerToRefresh = markerToRefresh;
-        }
-
-        @Override
-        public void onSuccess() {
-            markerToRefresh.showInfoWindow();
-        }
-
-        @Override
-        public void onError(Exception e) {
-        }
     }
 }

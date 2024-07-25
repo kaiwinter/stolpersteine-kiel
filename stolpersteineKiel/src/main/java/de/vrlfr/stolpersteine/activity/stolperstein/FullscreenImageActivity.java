@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.ortiz.touchview.TouchImageView;
-import com.squareup.picasso.Picasso;
 
 import de.vrlfr.stolpersteine.R;
 import de.vrlfr.stolpersteine.activity.BaseActivity;
@@ -44,7 +43,7 @@ public class FullscreenImageActivity extends BaseActivity {
         TouchImageView imageView = findViewById(R.id.full_image);
         imageView.setMaxZoom(6);
 
-        Picasso.get().load(imageId).error(android.R.drawable.ic_delete).into(imageView);
+        imageView.setImageResource(imageId);
 
         String adresse = extras.getString(INTENT_EXTRA_ADRESSE);
         getSupportActionBar().setTitle(adresse);
