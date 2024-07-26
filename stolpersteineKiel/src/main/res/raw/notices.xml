@@ -17,12 +17,6 @@
   -->
 <notices>
     <notice>
-        <name>Picasso</name>
-        <url>http://square.github.io/picasso/</url>
-        <copyright>Copyright 2013 Square, Inc.</copyright>
-        <license>Apache Software License 2.0</license>
-    </notice>
-    <notice>
         <name>ParallaxScroll</name>
         <url>https://github.com/nirhart/ParallaxScroll</url>
         <copyright>Copyright (c) 2014 Nir Hartmann</copyright>
@@ -47,12 +41,6 @@
         <license>Creative Commons Attribution-NoDerivs 3.0 Unported</license>
     </notice>
     <notice>
-        <name>Android PdfViewer</name>
-        <url>https://github.com/barteksc/AndroidPdfViewer</url>
-        <copyright>Bartosz Schiller</copyright>
-        <license>Apache Software License 2.0</license>
-    </notice>
-    <notice>
         <name>Realm-Java</name>
         <url>https://github.com/realm/realm-java</url>
         <copyright>Realm Inc</copyright>
@@ -62,5 +50,11 @@
         <name>Google Maps</name>
         <url>https://www.google.com</url>
         <license>Google Maps Android API v2</license>
+    </notice>
+    <notice>
+        <name>Markwon</name>
+        <url>https://github.com/noties/Markwon</url>
+        <copyright>Dimitry Ivanov</copyright>
+        <license>Apache Software License 2.0</license>
     </notice>
 </notices>
