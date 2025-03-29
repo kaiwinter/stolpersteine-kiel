@@ -46,7 +46,7 @@ tasks.whenTaskAdded { task ->
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    implementation 'com.google.android.gms:play-services-maps:19.0.0'
+    implementation 'com.google.android.gms:play-services-maps:19.1.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
 
     implementation 'com.github.thebestpol:ParallaxScroll:12665d54d5'

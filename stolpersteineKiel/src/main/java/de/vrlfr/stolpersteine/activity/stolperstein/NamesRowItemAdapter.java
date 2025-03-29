@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.common.util.Strings;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -60,7 +62,12 @@ public final class NamesRowItemAdapter extends ArrayAdapter<String> {
             if (!alleNamenString.isEmpty()) {
                 alleNamenString += "<br/>";
             }
-            alleNamenString += "<b>" + stolperstein.name + "</b> " + stolperstein.geboren + " - " + stolperstein.tod;
+
+            if (Strings.isEmptyOrWhitespace(stolperstein.tod)) {
+                alleNamenString += "<b>" + stolperstein.name + "</b> * " + stolperstein.geboren;
+            } else {
+                alleNamenString += "<b>" + stolperstein.name + "</b> * " + stolperstein.geboren + "  † " + stolperstein.tod;
+            }
         }
         viewHolder.textViewNamen.setText(Html.fromHtml(alleNamenString));
 
